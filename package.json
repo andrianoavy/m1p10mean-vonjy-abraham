@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/andrianoavy/m1p10mean-vonjy-abraham/issues"
   },
-  "homepage": "https://github.com/andrianoavy/m1p10mean-vonjy-abraham#readme"
+  "homepage": "https://github.com/andrianoavy/m1p10mean-vonjy-abraham#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
