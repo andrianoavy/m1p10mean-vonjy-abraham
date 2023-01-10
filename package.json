@@ -1,0 +1,19 @@
+{
+  "name": "m1p10mean-vonjy-abraham",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrianoavy/m1p10mean-vonjy-abraham.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrianoavy/m1p10mean-vonjy-abraham/issues"
+  },
+  "homepage": "https://github.com/andrianoavy/m1p10mean-vonjy-abraham#readme"
+}
