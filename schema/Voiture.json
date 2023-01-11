@@ -1,0 +1,8 @@
+{
+    "Voiture":{
+        "idClient":"id",
+        "numImmatricul":"String",
+        "Marque":"Str",
+        "Modele":"Str"        
+    }
+}

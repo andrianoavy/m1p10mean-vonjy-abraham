@@ -1,0 +1,9 @@
+{
+    "Facture":{
+        "Ref":"",
+        "Date":"",
+        "idEntree":"",
+        "taxe":"Par defaut(env)",
+        "remise":""        
+    }
+}

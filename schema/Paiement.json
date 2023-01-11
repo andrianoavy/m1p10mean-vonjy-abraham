@@ -1,0 +1,9 @@
+{
+    "Paiement":{
+        "idClient":"",
+        "idFacture":"",
+        "Montant":"Double",
+        "DatePaiement":"",
+        "EtatPaiement":""
+    }
+}
