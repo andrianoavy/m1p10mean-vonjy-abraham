@@ -1,0 +1,18 @@
+{
+    "Reparation":{
+        "description":"",
+        "Devis":{
+            "prestation":{
+                "designation":"",
+                "montant":""
+            },
+            "achat":{
+                "designation":"",
+                "montant":""
+            }
+        },
+        "Etat":"",
+        "DateDebut":"DateTime",
+        "DateFin":"DateTime"
+    }
+}

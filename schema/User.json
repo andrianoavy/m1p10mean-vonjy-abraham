@@ -1,0 +1,6 @@
+{"User":{
+        "username":"String",
+        "password":"String",
+        "role":""        
+    }
+}

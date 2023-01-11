@@ -1,0 +1,8 @@
+{
+    "Entree":{
+        "idVoiture":"",
+        "DateEntree":"",
+        "DateSortie":"",
+        "Reparations":[]
+    }
+}
