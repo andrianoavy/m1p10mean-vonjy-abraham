@@ -1,7 +1,8 @@
 {
-    "Client":{
-        "name":"String",
-        "telephone":"String",
-        "email":"String"
+    "Client": {
+        "idUser": "",
+        "name": "String",
+        "telephone": "String",
+        "email": "String"
     }
 }
