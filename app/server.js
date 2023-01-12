@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 connectServer(() => {
 
-    app.use(require('./Routes/sales-routes'))
+    app.use(require('./Routes/users-routes'));
 
     app.listen(port, () => {
         console.log(`🏃Server is running on port ${port}...🏃`)
