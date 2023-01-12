@@ -1,10 +1,11 @@
 const recordRoutes = require('express').Router()
 
 const salesDb = require('../db/sales-db') 
+const authorize = require('../middlewares/auth-middlewares') 
 
 const baseRoute = '/sales'
 
-recordRoutes.route(baseRoute).get(async function (req, res) {
+recordRoutes.route(baseRoute).get(authorize, async function (req, res) {
     console.log('/sales GET works!💯 haha');
     salesDb.getAll()
         .then((result) => res.json(result))
@@ -15,7 +16,7 @@ recordRoutes.route(baseRoute).get(async function (req, res) {
         )
 })
 
-recordRoutes.route(`${baseRoute}/:id`).get(async function (req, res) {
+recordRoutes.route(`${baseRoute}/:id`).get(authorize,async function (req, res) {
     const id = req.params['id']
     console.log('/sales GET works!💯 id = ' + id);
     salesDb.getOneById(id)
@@ -27,7 +28,7 @@ recordRoutes.route(`${baseRoute}/:id`).get(async function (req, res) {
         )
 })
 
-recordRoutes.route(baseRoute).post(async function (req, res) {
+recordRoutes.route(baseRoute).post(authorize,async function (req, res) {
     console.log('/sales GET works!💯 ');
     sale = req.body;
     salesDb.saveOne(sale)

@@ -12,6 +12,17 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\index.js"
+        },
+        {
+            "name": "Attach",
+            "type": "node",
+            "request": "attach",
+            "port":9229,
+            "address": "localhost",
+            "restart": true,
+            "sourceMaps": false,
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": null
         }
     ]
 }
