@@ -1,11 +1,11 @@
 const recordRoutes = require('express').Router()
 
-const salesDb = require('../db/sales-db')
+const salesDb = require('../db/sales-db') 
 
 const baseRoute = '/sales'
 
 recordRoutes.route(baseRoute).get(async function (req, res) {
-    console.log('/sales GET works!💯');
+    console.log('/sales GET works!💯 haha');
     salesDb.getAll()
         .then((result) => res.json(result))
         .catch((err) => {
@@ -28,7 +28,7 @@ recordRoutes.route(`${baseRoute}/:id`).get(async function (req, res) {
 })
 
 recordRoutes.route(baseRoute).post(async function (req, res) {
-    console.log('/sales GET works!💯');
+    console.log('/sales GET works!💯 ');
     sale = req.body;
     salesDb.saveOne(sale)
         .then(() => res.json(sale))
