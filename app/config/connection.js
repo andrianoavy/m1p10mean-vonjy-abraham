@@ -7,7 +7,7 @@ const db_name = process.env.MONGO_DB_NAME || 'testdb'
 
 let dbConnection;
 
-const connectServer = function (callback) {
+const connectDb = function (callback) {
     MongoClient.connect(connectionString)
         .then((client) => {
             console.log("database is connected");
@@ -22,6 +22,6 @@ const getDb = function () {
 }
 
 module.exports = {
-    connectServer,
+    connectDb,
     getDb
 }

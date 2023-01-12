@@ -1,6 +1,6 @@
 const recordRoutes = require('express').Router()
 
-const salesDb = require('../Db/sales-db')
+const salesDb = require('../db/sales-db')
 
 const baseRoute = '/sales'
 

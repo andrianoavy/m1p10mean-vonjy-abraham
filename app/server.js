@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const bodyParser = require('body-parser')
-const { connectServer } = require('./Config/connection')
+const { connectDb } = require('./Config/connection')
 
 const app = require('express')();
 
@@ -15,9 +15,9 @@ app.get('/', (req, res) => {
 })
 
 
-connectServer(() => {
-    
-    app.use(require('./Routes/sales-routes'))
+connectDb(() => {
+    //Atao eto ny require Routes
+    app.use(require('./routes/sales-routes'))
 
     app.listen(port, () => {
         console.log(`🏃Server is running on port ${port}...🏃`)
