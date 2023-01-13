@@ -4,22 +4,33 @@ function checkRole(roles) {
     console.log('checking role ...');
     return checkRole[roles] || (checkRole[roles] =
         function(req, res, next) {
-            // const user_id = '63c01ae430547190cf494c94';
+
+            // const id = res.locals.jwtPayload.userId;
+
             // let user;
             // usersDb.getOneById(user_id)
             //     .then((result) =>
-            //         console.log(result))
+            //         user = result
+            //     )
             //     .catch((err) => {
             //         console.log(err);
             //         res.status(400).send("Error fetching document!")
             //     })
-            user_role = 'FINANCIER'
+
+            // let user_role = user.role;
+            let user_role = "CLIENT";
+
+            let isValid = false;
             for (var role of roles) {
                 if (role == user_role) {
-                    next();
-                } else {
-                    res.status(400).send("Error fetching document!")
+                    isValid = true;
                 }
+            }
+
+            if (isValid) {
+                next();
+            } else {
+                res.status(400).send("Error fetching document!")
             }
         }
     );

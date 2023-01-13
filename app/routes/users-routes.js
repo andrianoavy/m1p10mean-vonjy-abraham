@@ -3,11 +3,11 @@ const recordRoutes = require('express').Router()
 const usersDb = require('../Db/sales-db');
 const checkRole = require('../middleware/checkRole');
 
-const { financier, atelier } = require('../utils/role');
+let { AllUsers, Client, ClientAtelier, ClientFinancier, Atelier, Financier, Atelierfinancier } = require('../utils/role');
 
 const baseRoute = '/api'
 
-recordRoutes.get('/api/users', checkRole(['FINANCIER']), function(req, res) {
+recordRoutes.get('/api/users', checkRole(AllUsers), function(req, res) {
     console.log('/sales GET works!💯');
     usersDb.getAll()
         .then((result) => res.json(result))

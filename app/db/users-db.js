@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 const dbo = require('../Config/connection').getDb()
 const collection = dbo.collection('users')
 
@@ -6,7 +8,7 @@ module.exports = {
         return collection.find({}).toArray();
     },
     getOneById: async function(id) {
-        return collection.findOne({ _id: Number.parseInt(id) });
+        return collection.findOne({ _id: new ObjectId(id) });
     },
 
     getByName: async function(username) {

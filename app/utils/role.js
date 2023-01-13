@@ -1,33 +1,42 @@
-module.exports
-const allUsers = [
+let AllUsers = [
     'CLIENT',
     'ATELIER',
     'FINANCIER'
 ]
-module.exports
-const client = [
+
+let Client = [
     'CLIENT',
 ]
-module.exports
-const atelier = [
+
+let Atelier = [
     'ATELIER',
 ]
-module.exports
-const financier = [
+
+let Financier = [
     'FINANCIER',
 ]
-module.exports
-const ClientFinancier = [
-    'FINANCIER',
-    'CLIENT'
+
+let ClientFinancier = [
+    "FINANCIER",
+    "CLIENT"
 ]
-module.exports
-const Atelierfinancier = [
-    'FINANCIER',
-    'ATELIER'
+
+let Atelierfinancier = [
+    "FINANCIER",
+    "ATELIER"
 ]
-module.exports
-const ClientAtelier = [
-    'CLIENT',
-    'ATELIER'
+
+let ClientAtelier = [
+    "CLIENT",
+    "ATELIER"
 ]
+
+module.exports = {
+    AllUsers,
+    Client,
+    ClientAtelier,
+    ClientFinancier,
+    Financier,
+    Atelier,
+    Atelierfinancier
+}
