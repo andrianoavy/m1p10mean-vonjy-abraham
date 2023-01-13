@@ -16,11 +16,18 @@ recordRoutes.route(`${baseRoute}/inscription`).post(async function (req, res) {
     bodyParser
     //Crypter le mot de passe
     bcrypt.hash(req.body.password, 10).then((hash) => {
-        const user = new User(req.body.name,hash,req.body.email,req.body.role)
+        const user = new User(
+          req.body.name,
+          hash,
+          req.body.email,
+          //Hard coder le client
+          req.body.role || "Client"
+        );
         userDb.saveOne(user)
         .then((result) => res.json(result))
         .catch((err) => {
-            console.log(err.errInfo);
+            console.log('Erreur '+err);
+            console.log('Erreur Info '+err.errInfo);
             return res.status(400).send("Erreur lors de l'insertion de l'utilisateur!")
             }
         )
@@ -51,7 +58,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
         }
         let jwtToken = jwt.sign(
           {
-            email: getUser.email,
+            name: getUser.name,
             userId: getUser._id,
           },
           process.env.JWT_TOKEN_SECRET||'TsiAmBarATelOn\'ny t0kenaKo',

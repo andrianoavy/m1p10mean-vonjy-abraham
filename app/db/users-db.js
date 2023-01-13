@@ -6,7 +6,7 @@ module.exports = {
         return collection.insertOne(user);
     },
     findOneById: async function (id) {
-        return collection.findOne({_id:id});
+        return collection.findOne({_id:new ObjectId(id)});
     },
     findOne: async function (where) {
         return collection.findOne(where);

@@ -1,11 +1,18 @@
 require('dotenv').config()
 
+const cors = require('cors')
 const bodyParser = require('body-parser')
-const { connectDb } = require('./Config/connection')
-
 const app = require('express')();
 
+const { connectDb } = require('./Config/connection')
+
 const port = process.env.PORT || 3000;
+
+var corsOptions = {
+    origin: "http://localhost:4200"
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -13,6 +20,7 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
     res.send('Hello NodeJs👋!')
 })
+
 
 
 connectDb(() => {
