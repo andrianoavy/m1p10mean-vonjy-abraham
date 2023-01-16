@@ -1,34 +1,34 @@
 let AllUsers = [
-    'CLIENT',
-    'ATELIER',
-    'FINANCIER'
+    'Client',
+    'Atelier',
+    'Financier'
 ]
 
 let Client = [
-    'CLIENT',
+    'Client',
 ]
 
 let Atelier = [
-    'ATELIER',
+    'Atelier',
 ]
 
 let Financier = [
-    'FINANCIER',
+    'Financier',
 ]
 
 let ClientFinancier = [
-    "FINANCIER",
-    "CLIENT"
+    "Financier",
+    "Client"
 ]
 
-let Atelierfinancier = [
-    "FINANCIER",
-    "ATELIER"
+let AtelierFinancier = [
+    "Financier",
+    "Atelier"
 ]
 
 let ClientAtelier = [
-    "CLIENT",
-    "ATELIER"
+    "Client",
+    "Atelier"
 ]
 
 module.exports = {
@@ -38,5 +38,5 @@ module.exports = {
     ClientFinancier,
     Financier,
     Atelier,
-    Atelierfinancier
+    AtelierFinancier
 }

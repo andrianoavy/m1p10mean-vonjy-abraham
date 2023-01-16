@@ -4,7 +4,8 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = require('express')();
 
-const { connectDb } = require('./Config/connection')
+const { connectDb } = require('./Config/connection');
+const checkJwt = require('./middleware/checkJwt');
 
 const port = process.env.PORT || 3000;
 
@@ -20,7 +21,6 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
     res.send('Hello NodeJs👋!')
 })
-
 
 
 connectDb(() => {
