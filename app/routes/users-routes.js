@@ -1,24 +1,26 @@
 const recordRoutes = require('express').Router()
 
-const salesDb = require('../db/sales-db') 
-const authorize = require('../middlewares/auth-middlewares') 
+const usersDb = require('../Db/users-db');
+const checkRole = require('../middleware/checkRole');
+
+let { AllUsers, Client, ClientAtelier, ClientFinancier, Atelier, Financier, Atelierfinancier } = require('../utils/role');
 
 const baseRoute = '/api'
 
-recordRoutes.route(baseRoute).get(authorize, async function (req, res) {
-    console.log('/sales GET works!💯 haha');
-    salesDb.getAll()
+recordRoutes.get('/api/users', checkRole(AllUsers), function(req, res) {
+    console.log('/sales GET works!💯');
+    usersDb.getAll()
         .then((result) => res.json(result))
         .catch((err) => {
             console.log(err);
             res.status(400).send("Error fetching listings!")
         })
-})
+});
 
-recordRoutes.route(`${baseRoute}/:id`).get(authorize,async function (req, res) {
+recordRoutes.route(`${baseRoute}/user/:id`).get(async function(req, res) {
     const id = req.params['id']
     console.log('/sales GET works!💯 id = ' + id);
-    salesDb.getOneById(id)
+    usersDb.getOneById(id)
         .then((result) => res.json(result))
         .catch((err) => {
             console.log(err);
@@ -26,10 +28,10 @@ recordRoutes.route(`${baseRoute}/:id`).get(authorize,async function (req, res) {
         })
 })
 
-recordRoutes.route(baseRoute).post(authorize,async function (req, res) {
-    console.log('/sales GET works!💯 ');
+recordRoutes.route('/api/user').post(async function(req, res) {
+    console.log('/sales GET works!💯');
     sale = req.body;
-    salesDb.saveOne(sale)
+    usersDb.saveOne(sale)
         .then(() => res.json(sale))
         .catch((err) => {
             console.log(err);
