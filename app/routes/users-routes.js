@@ -1,6 +1,6 @@
 const recordRoutes = require('express').Router()
 
-const usersDb = require('../Db/sales-db');
+const usersDb = require('../Db/users-db');
 const checkRole = require('../middleware/checkRole');
 
 let { AllUsers, Client, ClientAtelier, ClientFinancier, Atelier, Financier, Atelierfinancier } = require('../utils/role');
@@ -28,7 +28,7 @@ recordRoutes.route(`${baseRoute}/user/:id`).get(async function(req, res) {
         })
 })
 
-recordRoutes.route('/api/sale').post(async function(req, res) {
+recordRoutes.route('/api/user').post(async function(req, res) {
     console.log('/sales GET works!💯');
     sale = req.body;
     usersDb.saveOne(sale)

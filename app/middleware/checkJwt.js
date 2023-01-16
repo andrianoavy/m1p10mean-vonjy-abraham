@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-function checkJwt {
+function checkJwt() {
     console.log('checking role ...');
     return checkJwt || (checkJwt =
         function(req, res, next) {

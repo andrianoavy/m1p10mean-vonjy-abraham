@@ -4,7 +4,7 @@ const salesDb = require('../Db/sales-db')
 
 const baseRoute = '/api'
 
-recordRoutes.route('/api/users').get(async function(req, res) {
+recordRoutes.route('/api/sales').get(async function(req, res) {
     console.log('/sales GET works!💯');
     salesDb.getAll()
         .then((result) => res.json(result))

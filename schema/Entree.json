@@ -1,8 +1,27 @@
+// {
+//     "Entree": {
+//         "idVoiture": "",
+//         "DateEntree": "",
+//         "DateSortie": "",
+//         "Reparations": []
+//     }
+// }
+
 {
-    "Entree":{
-        "idVoiture":"",
-        "DateEntree":"",
-        "DateSortie":"",
-        "Reparations":[]
-    }
+    "dateEntree": "12/01/2023",
+    "dateSortie": "13/01/2023",
+    "voitureId": 1,
+    "reparations": [{
+        "reparationId": 1,
+        "description": "Reglage embreillage",
+        "prestation": [
+            { "designation": "Main d'ouevre", "montant": 100000 }
+        ],
+        "achat": [
+            { "designation": "Achat coupelle", "montant": 50000 }
+        ],
+        "etat": "En cours",
+        "DateDebut": "12/01/2023",
+        "DateFin": "13/01/2023"
+    }]
 }
