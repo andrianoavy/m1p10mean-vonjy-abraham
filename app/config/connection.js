@@ -9,11 +9,7 @@ const db_name = process.env.MONGO_DB_NAME || 'garage'
 
 let dbConnection;
 
-<<<<<<< HEAD
 const connectDb = function (callback) {
-=======
-const connectServer = function(callback) {
->>>>>>> config-vonjy
     MongoClient.connect(connectionString)
         .then((client) => {
             console.log("database is connected");
