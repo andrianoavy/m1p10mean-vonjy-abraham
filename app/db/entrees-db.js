@@ -15,11 +15,11 @@ module.exports = {
         return collection.find({ name: username });
     },
 
-    saveOne: async function(sale) {
-        return collection.insertOne(sale);
+    saveOne: async function(entree) {
+        return collection.insertOne(entree);
     },
 
     saveRepartion: async function(entreeId, reparation) {
-        return
+        return collection.
     }
 }
