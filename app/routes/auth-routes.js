@@ -12,8 +12,7 @@ const baseRoute = '/auth'
 //inscription
 recordRoutes.route(`${baseRoute}/inscription`).post(async function (req, res) {
     //TODO:Vérifier les champs
-
-    bodyParser
+    
     //Crypter le mot de passe
     bcrypt.hash(req.body.password, 10).then((hash) => {
         const user = new User(
