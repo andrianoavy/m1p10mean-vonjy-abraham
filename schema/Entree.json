@@ -1,6 +1,7 @@
 {
     "Entree":{
         "idVoiture":"",
+        "description":"",
         "DateEntree":"",
         "DateSortie":"",
         "Reparations":[]
