@@ -4,7 +4,6 @@ require('dotenv').config();
 
 const checkJwt =
     function(req, res, next) {
-        console.log('checking role ...');
         //Get the jwt token from the head
         let token = req.headers["authorization"];
 

@@ -1,7 +1,6 @@
 const usersDb = require('../Db/sales-db')
 
 function checkRole(roles) {
-    console.log('checking role ...');
     return checkRole[roles] || (checkRole[roles] =
         function(req, res, next) {
             const id = req.jwtPayLoad.userId;

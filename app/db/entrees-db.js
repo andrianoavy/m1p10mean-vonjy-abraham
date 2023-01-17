@@ -19,7 +19,16 @@ module.exports = {
         return collection.insertOne(entree);
     },
 
-    saveRepartion: async function(entreeId, reparation) {
-        return collection.
+    saveReparation: async function(entreeId, reparation) {
+        return collection.updateOne({ _id: new ObjectId(entreeId) }, { $push: { reparations: reparation } })
+    },
+
+    getValueForNextSequence: async function(sequenceName) {
+
+        var sequenceDoc = dbo.collection('sample').findOneAndUpdate({
+            query: { _id: sequenceName },
+            update: { $inc: { "sequence_value": 1 } }
+        });
+        return sequenceDoc.sequence_value;
     }
 }
