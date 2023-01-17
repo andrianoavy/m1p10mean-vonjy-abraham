@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const app = require('express')();
 
 const { connectDb } = require('./Config/connection');
-const checkJwt = require('./middleware/checkJwt');
+
 
 const port = process.env.PORT || 3000;
 
@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 connectDb(() => {
     //Atao eto ny require Routes
     app.use(require('./routes/sales-routes'))
+    app.use(require('./routes/entrees-routes'))
     app.use(require('./routes/auth-routes'))
 
     app.listen(port, () => {

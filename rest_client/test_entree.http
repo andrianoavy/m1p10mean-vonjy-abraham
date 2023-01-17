@@ -1,0 +1,58 @@
+@baseUrl = http://localhost:3000
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzU4Y2E1NjNhNTYzYWFjOTA5OGNkMCIsImlhdCI6MTY3Mzk0Mjg1OCwiZXhwIjoxNjczOTQ2NDU4fQ.lm5loou7JwLbRYwnkQluLhZBfe7ZhgS6yE5icooTHYU
+
+
+###
+POST {{baseUrl}}/auth/inscription HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"Jean",
+    "email":"jean@gmail.com",
+    "password":"123456",
+    "role":"Atelier"
+}
+###
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"jean@gmail.com",
+    "password":"123456"
+}
+
+###
+
+POST  {{baseUrl}}/api/atelier/entree HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "designation":"Entree raparation moteur",
+    "dateEntree":"12/01/2023",
+    "dateSortie":"",
+    "voitureId":"63c5935efd2fd2c4617e1573",
+    "repararions":[]
+}
+
+###
+GET {{baseUrl}}/api/atelier/entrees HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+POST  {{baseUrl}}/api/atelier/reparation HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "description":"reparation voiture 223",
+    "designationPrestation":"Main d'ouevre",
+    "montantPrestation":200000,
+    "designationAchat":"Achat piston",
+    "montantAchat":500000,
+    "dateDebut":"23/01/2023",
+    "dateFin":"26/01/2023"
+}
+
+###
