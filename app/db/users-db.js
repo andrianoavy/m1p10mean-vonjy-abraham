@@ -1,4 +1,4 @@
-const dbo = require('../Config/connection').getDb()
+const dbo = require('../config/connection').getDb()
 const collection = dbo.collection('Users')
 const { ObjectId } = require('mongodb')
 
