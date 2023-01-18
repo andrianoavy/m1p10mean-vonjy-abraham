@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = require('express')();
 
-const { connectDb } = require('./Config/connection');
+const { connectDb } = require('./config/connection');
 
 
 const port = process.env.PORT || 3000;
