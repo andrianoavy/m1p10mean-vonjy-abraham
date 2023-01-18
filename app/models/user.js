@@ -35,5 +35,5 @@ module.exports = {
             }
         }
     },
-    indexes:[{indexInfo:{ "email": 1 },isUnique:true}]
+    indexes:[{indexInfo:{ "email": 1 },isUnique:true}],
 }

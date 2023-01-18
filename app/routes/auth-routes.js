@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const bodyParser = require('body-parser')
+const clientRole = require('../utils/role').Client
 
 const recordRoutes = require('express').Router()
 
@@ -11,7 +12,7 @@ const baseRoute = '/auth'
 
 //inscription
 recordRoutes.route(`${baseRoute}/inscription`).post(async function (req, res) {
-    //TODO:Vérifier les champs
+    //TODO: [Route Inscription] Travailler sur le controle des valeurs des champs
     
     //Crypter le mot de passe
     bcrypt.hash(req.body.password, 10).then((hash) => {
@@ -19,9 +20,12 @@ recordRoutes.route(`${baseRoute}/inscription`).post(async function (req, res) {
           req.body.name,
           hash,
           req.body.email,
+          //TODO Hard Coder-na hoe client v? 
           //Hard coder le client
-          req.body.role || "Client"
+          "Client"
         );
+        user.telephone = req.body.telephone,
+        user.adresse = req.body.adresse
         userDb.saveOne(user)
         .then((result) => res.json(result))
         .catch((err) => {
@@ -55,11 +59,16 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
             message: 'Authentification échouée',
           })
         }
+
+        let payload = 
+        {
+          name: getUser.name,
+          userId: getUser._id,
+        };
+
+
         let jwtToken = jwt.sign(
-          {
-            name: getUser.name,
-            userId: getUser._id,
-          },
+          payload,
           process.env.JWT_TOKEN_SECRET||'TsiAmBarATelOn\'ny t0kenaKo',
           {
             expiresIn: '1h',

@@ -14,7 +14,7 @@
             "program": "${workspaceFolder}\\index.js"
         },
         {
-            "name": "Attach",
+            "name": "Attach nodemon",
             "type": "node",
             "request": "attach",
             "port":9229,

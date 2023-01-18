@@ -1,6 +1,6 @@
 const { ObjectId } = require('bson');
 
-const dbo = require('../Config/connection').getDb()
+const dbo = require('../config/connection').getDb()
 const collection = dbo.collection('Voitures')
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
     findAllWhere: async function (where) {
         return collection.find(where).toArray();
     },
-    findAllByClient:async function (idClient){
-        return collection.find({idClient:new ObjectId(idClient)}).toArray();
+    findAllByClient:async function (idUser){
+        return collection.find({_idUser:new ObjectId(idUser)}).toArray();
     }
 }

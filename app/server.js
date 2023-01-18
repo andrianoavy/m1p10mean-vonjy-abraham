@@ -22,7 +22,6 @@ app.get('/', (req, res) => {
 })
 
 
-
 connectDb(() => {
     //Atao eto ny require Routes
     app.use(require('./routes/sales-routes'))

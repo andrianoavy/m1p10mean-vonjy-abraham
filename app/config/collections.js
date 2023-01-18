@@ -3,6 +3,8 @@ const { Db, Collection } = require("mongodb")
 //Listes des collections
 const collections = [
     require('../models/user'),
+    // require('../models/client'),
+    require('../models/voiture'),
 ]
 
 module.exports = {
