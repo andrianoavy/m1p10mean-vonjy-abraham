@@ -27,6 +27,18 @@ module.exports = {
         return collection.findOne({ _id: new ObjectId(entreeId) });
     },
 
+    findEntreeWithCar: async function() {
+        const data = collection.aggregate([{
+            $lookup: {
+                from: 'voitures',
+                LocalField: 'voitureId',
+                foreignField: '_id',
+                as: 'voiture'
+            }
+        }]);
+        return data;
+    },
+
     updateSequenceValue: async function(sequenceName) {
         return dbo.collection('sample').update({ _id: sequenceName }, { $inc: { sequence_value: 1 } })
     },

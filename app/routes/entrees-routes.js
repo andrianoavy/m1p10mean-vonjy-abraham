@@ -79,7 +79,7 @@ recordRoutes.get('/api/atelier/entrees', checkJwt, checkRole(Atelier), (req, res
         .then((entree) => {
             if (!entree) {
                 return res.status(401).json({
-                    message: 'Enregistrement échouée',
+                    message: 'Pas de resultat',
                 })
             }
             res.status(200).json({
@@ -88,7 +88,27 @@ recordRoutes.get('/api/atelier/entrees', checkJwt, checkRole(Atelier), (req, res
             })
         }).catch((err) => {
             return res.status(401).json({
-                message: 'Enregistrement de l\'information échouée',
+                message: 'error',
+            })
+        })
+})
+
+
+recordRoutes.get('/api/atelier/entrees/car', checkJwt, checkRole(Atelier), (req, res) => {
+    entreeDb.findEntreeWithCar()
+        .then((entree) => {
+            if (!entree) {
+                return res.status(401).json({
+                    message: 'Pas de resultat',
+                })
+            }
+            res.status(200).json({
+                status: "Success",
+                data: entree
+            })
+        }).catch((err) => {
+            return res.status(401).json({
+                message: 'error',
             })
         })
 })

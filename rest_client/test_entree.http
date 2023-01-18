@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzU4Y2E1NjNhNTYzYWFjOTA5OGNkMCIsImlhdCI6MTY3NDAxOTE4OSwiZXhwIjoxNjc0MDIyNzg5fQ.grTFRNCsfzOopTTEgCi3T-OqSp9-wqQscSTZdOLnHtI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzU4Y2E1NjNhNTYzYWFjOTA5OGNkMCIsImlhdCI6MTY3NDAyOTI4NSwiZXhwIjoxNjc0MDMyODg1fQ.NzCVXigZDkX4tBZbmtltgxVkneNRSlMKbZlCSXHwnBo
 
 
 ###
@@ -38,6 +38,10 @@ Content-Type: application/json
 
 ###
 GET {{baseUrl}}/api/atelier/entrees HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/atelier/entrees/car HTTP/1.1
 Authorization: Bearer {{token}}
 
 ###
