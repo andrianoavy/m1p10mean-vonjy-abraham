@@ -9,8 +9,8 @@ const { Raparation } = require('../models/reparation')
 
 const entreeDb = require('../db/entrees-db')
 
-const checkJwt = require('../middleware/checkJwt')
-const checkRole = require('../middleware/checkRole')
+const checkJwt = require('../middlewares/checkJwt')
+const checkRole = require('../middlewares/checkRole')
 
 const baseRoute = '/api'
 
