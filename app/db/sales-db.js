@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb')
-const dbo = require('../Config/connection').getDb()
+const dbo = require('../config/connection').getDb()
 const collection = dbo.collection('Users')
 
 module.exports = {
