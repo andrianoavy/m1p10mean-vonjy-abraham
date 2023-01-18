@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzU4Y2E1NjNhNTYzYWFjOTA5OGNkMCIsImlhdCI6MTY3Mzk0Mjg1OCwiZXhwIjoxNjczOTQ2NDU4fQ.lm5loou7JwLbRYwnkQluLhZBfe7ZhgS6yE5icooTHYU
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzU4Y2E1NjNhNTYzYWFjOTA5OGNkMCIsImlhdCI6MTY3NDAxOTE4OSwiZXhwIjoxNjc0MDIyNzg5fQ.grTFRNCsfzOopTTEgCi3T-OqSp9-wqQscSTZdOLnHtI
 
 
 ###
@@ -29,7 +29,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "designation":"Entree raparation moteur",
+    "designation":"Entree raparation os",
     "dateEntree":"12/01/2023",
     "dateSortie":"",
     "voitureId":"63c5935efd2fd2c4617e1573",
@@ -46,7 +46,8 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "description":"reparation voiture 223",
+    "entreeId":"63c6c500d3ff6cae60ca3770",
+    "description":"reparation cabine",
     "designationPrestation":"Main d'ouevre",
     "montantPrestation":200000,
     "designationAchat":"Achat piston",
@@ -56,3 +57,6 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{baseUrl}}/api/atelier/entree/reparations?id=63c6c500d3ff6cae60ca3770 HTTP/1.1
+Authorization: Bearer {{token}}
