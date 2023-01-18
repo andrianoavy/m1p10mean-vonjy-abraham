@@ -1,6 +1,6 @@
 const recordRoutes = require('express').Router()
 
-const db = require('../Db/voitures-db');
+const db = require('../db/voitures-db');
 
 const authorize = require('../middlewares/auth-middlewares');
 const { Voiture } = require('../models/voiture');

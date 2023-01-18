@@ -1,6 +1,6 @@
 const { ObjectId } = require('bson');
 
-const dbo = require('../Config/connection').getDb()
+const dbo = require('../config/connection').getDb()
 const collection = dbo.collection('Voitures')
 
 module.exports = {
