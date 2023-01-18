@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:3000
+@baseUrl = https://m1p10mean.onrender.com/
 
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVm9uankiLCJ1c2VySWQiOiI2M2M1MGNmNmQ1ODYzMjExNzY4MWQ1MTYiLCJpYXQiOjE2NzM4NzQxMTIsImV4cCI6MTY3Mzg3NzcxMn0.DsaSD0FJt9FttRwMKfuds6nTHmJfgwCUmap1z6t0Ifo
 

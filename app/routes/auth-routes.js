@@ -7,8 +7,8 @@ const recordRoutes = require('express').Router()
 const userDb = require('../db/users-db')
 const { User } = require('../models/user')
 
-const checkJwt = require('../middleware/checkJwt')
-const checkRole = require('../middleware/checkRole')
+const checkJwt = require('../middlewares/checkJwt')
+const checkRole = require('../middlewares/checkRole')
 
 const baseRoute = '/auth'
 
