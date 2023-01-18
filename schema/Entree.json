@@ -1,13 +1,5 @@
-// {
-//     "Entree": {
-//         "idVoiture": "",
-//         "DateEntree": "",
-//         "DateSortie": "",
-//         "Reparations": []
-//     }
-// }
-
 {
+    "designation": "",
     "dateEntree": "12/01/2023",
     "dateSortie": "13/01/2023",
     "voitureId": 1,

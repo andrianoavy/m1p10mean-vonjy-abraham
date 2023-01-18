@@ -15,11 +15,35 @@ module.exports = {
         return collection.find({ name: username });
     },
 
-    saveOne: async function(sale) {
-        return collection.insertOne(sale);
+    saveOne: async function(entree) {
+        return collection.insertOne(entree);
     },
 
-    saveRepartion: async function(entreeId, reparation) {
-        return
+    saveReparation: async function(entreeId, reparation) {
+        return collection.updateOne({ _id: new ObjectId(entreeId) }, { $push: { reparations: reparation } })
+    },
+
+    getAllReparationByEntree: async function(entreeId) {
+        return collection.findOne({ _id: new ObjectId(entreeId) });
+    },
+
+    findEntreeWithCar: async function() {
+        const data = collection.aggregate([{
+            $lookup: {
+                from: 'voitures',
+                LocalField: 'voitureId',
+                foreignField: '_id',
+                as: 'voiture'
+            }
+        }]);
+        return data;
+    },
+
+    updateSequenceValue: async function(sequenceName) {
+        return dbo.collection('sample').update({ _id: sequenceName }, { $inc: { sequence_value: 1 } })
+    },
+
+    getValueForNextSequence: async function() {
+        return dbo.collection('sample').findOne();
     }
 }

@@ -1,0 +1,66 @@
+@baseUrl = http://localhost:3000
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzU4Y2E1NjNhNTYzYWFjOTA5OGNkMCIsImlhdCI6MTY3NDAyOTI4NSwiZXhwIjoxNjc0MDMyODg1fQ.NzCVXigZDkX4tBZbmtltgxVkneNRSlMKbZlCSXHwnBo
+
+
+###
+POST {{baseUrl}}/auth/inscription HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"Jean",
+    "email":"jean@gmail.com",
+    "password":"123456",
+    "role":"Atelier"
+}
+###
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"jean@gmail.com",
+    "password":"123456"
+}
+
+###
+
+POST  {{baseUrl}}/api/atelier/entree HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "designation":"Entree raparation os",
+    "dateEntree":"12/01/2023",
+    "dateSortie":"",
+    "voitureId":"63c5935efd2fd2c4617e1573",
+    "repararions":[]
+}
+
+###
+GET {{baseUrl}}/api/atelier/entrees HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/atelier/entrees/car HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+POST  {{baseUrl}}/api/atelier/reparation HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "entreeId":"63c6c500d3ff6cae60ca3770",
+    "description":"reparation cabine",
+    "designationPrestation":"Main d'ouevre",
+    "montantPrestation":200000,
+    "designationAchat":"Achat piston",
+    "montantAchat":500000,
+    "dateDebut":"23/01/2023",
+    "dateFin":"26/01/2023"
+}
+
+###
+
+GET {{baseUrl}}/api/atelier/entree/reparations?id=63c6c500d3ff6cae60ca3770 HTTP/1.1
+Authorization: Bearer {{token}}
