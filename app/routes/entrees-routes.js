@@ -18,7 +18,7 @@ let { AllUsers, Client, ClientAtelier, ClientFinancier, Atelier, Financier, Atel
 
 recordRoutes.post('/api/atelier/entree', checkJwt, checkRole(Atelier), (req, res) => {
     const newEntree = new Entree(
-        req.body.designation, req.body.dateEntree, req.body.dateSortie, req.body.voitureId, req.body.reparations
+        req.body.designation, req.body.dateEntree, req.body.dateSortie, req.body.voitureId, []
     );
 
     entreeDb.saveOne(newEntree)
@@ -41,11 +41,22 @@ recordRoutes.post('/api/atelier/entree', checkJwt, checkRole(Atelier), (req, res
 
 
 recordRoutes.post('/api/atelier/reparation', checkJwt, checkRole(Atelier), (req, res) => {
-    const newReparation = new Raparation(
-        1, req.body.description, req.body.designationPrestation, req.body.montantPrestation, req.body.designationAchat, req.body.montantAchat, req.body.dateDebut, req.body.dateFin, "En attente"
+    let newReparation;
+    let reparationId;
+    entreeDb.getValueForNextSequence('item_id')
+        .then((idSeq) => {
+            reparationId = idSeq;
+        }).catch((err) => {
+            return res.status(401).json({
+                message: 'id not found',
+            })
+        })
+
+    newReparation = new Raparation(
+        reparationId, req.body.description, req.body.designationPrestation, req.body.montantPrestation, req.body.designationAchat, req.body.montantAchat, req.body.dateDebut, req.body.dateFin, "En attente"
     );
 
-    entreeDb.saveReparation("63c59882acb6d07a1fd32db3", newReparation)
+    entreeDb.saveReparation(req.body.entreeId, newReparation)
         .then((reparation) => {
             if (!reparation) {
                 return res.status(401).json({
@@ -68,7 +79,7 @@ recordRoutes.get('/api/atelier/entrees', checkJwt, checkRole(Atelier), (req, res
         .then((entree) => {
             if (!entree) {
                 return res.status(401).json({
-                    message: 'Enregistrement échouée',
+                    message: 'Pas de resultat',
                 })
             }
             res.status(200).json({
@@ -77,8 +88,49 @@ recordRoutes.get('/api/atelier/entrees', checkJwt, checkRole(Atelier), (req, res
             })
         }).catch((err) => {
             return res.status(401).json({
-                message: 'Enregistrement de l\'information échouée',
+                message: 'error',
             })
         })
 })
+
+
+recordRoutes.get('/api/atelier/entrees/car', checkJwt, checkRole(Atelier), (req, res) => {
+    entreeDb.findEntreeWithCar()
+        .then((entree) => {
+            if (!entree) {
+                return res.status(401).json({
+                    message: 'Pas de resultat',
+                })
+            }
+            res.status(200).json({
+                status: "Success",
+                data: entree
+            })
+        }).catch((err) => {
+            return res.status(401).json({
+                message: 'error',
+            })
+        })
+})
+
+recordRoutes.get('/api/atelier/entree/reparations', checkJwt, checkRole(Atelier), (req, res) => {
+
+    entreeDb.getAllReparationByEntree(req.query.id)
+        .then((reparation) => {
+            if (!reparation) {
+                return res.status(401).json({
+                    message: 'Impossible de touver des reparations',
+                })
+            }
+            res.status(200).json({
+                status: "Success",
+                data: reparation
+            })
+        }).catch((err) => {
+            return res.status(401).json({
+                message: 'Impossible de touver des reparations',
+            })
+        })
+})
+
 module.exports = recordRoutes;

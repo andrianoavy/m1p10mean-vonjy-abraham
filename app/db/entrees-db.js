@@ -23,12 +23,27 @@ module.exports = {
         return collection.updateOne({ _id: new ObjectId(entreeId) }, { $push: { reparations: reparation } })
     },
 
-    getValueForNextSequence: async function(sequenceName) {
+    getAllReparationByEntree: async function(entreeId) {
+        return collection.findOne({ _id: new ObjectId(entreeId) });
+    },
 
-        var sequenceDoc = dbo.collection('sample').findOneAndUpdate({
-            query: { _id: sequenceName },
-            update: { $inc: { "sequence_value": 1 } }
-        });
-        return sequenceDoc.sequence_value;
+    findEntreeWithCar: async function() {
+        const data = collection.aggregate([{
+            $lookup: {
+                from: 'voitures',
+                LocalField: 'voitureId',
+                foreignField: '_id',
+                as: 'voiture'
+            }
+        }]);
+        return data;
+    },
+
+    updateSequenceValue: async function(sequenceName) {
+        return dbo.collection('sample').update({ _id: sequenceName }, { $inc: { sequence_value: 1 } })
+    },
+
+    getValueForNextSequence: async function() {
+        return dbo.collection('sample').findOne();
     }
 }
