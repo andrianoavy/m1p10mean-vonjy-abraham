@@ -22,6 +22,7 @@ const connectDb = function (callback) {
         .catch((err) => {
             console.log("Problem connecting...");
             console.log(err);
+            console.log("Problem connecting...2");
         })
 }
 

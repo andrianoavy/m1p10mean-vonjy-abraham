@@ -45,9 +45,9 @@ module.exports = {
           },
         }
       }
-    }
+    } 
   },
-  indexes: [{ indexInfo: { "_idUser": 1 } }, { indexInfo: { "numImmatricul": 1 }, isUnique: true }],
+  indexes: [{ indexInfo: { "_idUser": 1 } }, { indexInfo: { "numImmatricul": "text" }, isUnique: true }],
   // TODO Travailler sur Implémentation de findWithLookup: avec ID, avec where et findOne 
   lookups: [
     {

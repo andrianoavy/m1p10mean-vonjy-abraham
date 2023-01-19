@@ -1,6 +1,6 @@
 const recordRoutes = require('express').Router()
 
-const usersDb = require('../Db/users-db');
+const usersDb = require('../db/users-db');
 const checkRole = require('../middlewares/checkRole');
 
 let { AllUsers, Client, ClientAtelier, ClientFinancier, Atelier, Financier, Atelierfinancier } = require('../utils/role');
