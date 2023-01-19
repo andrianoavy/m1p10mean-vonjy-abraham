@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDA3MDYwNCwiZXhwIjoxNjc0MDc0MjA0fQ.Nb4v0tEWohQipNO0YYV1aYeCCv6Qbr01zZHYKfEdwyc
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDExNTUzMiwiZXhwIjoxNjc0MTE5MTMyfQ.rs7AUtxdHPN07RYUB-tqyy9CEv1PP4_XworllqPOBqQ
 
 ###
 POST {{baseUrl}}/auth/inscription HTTP/1.1
@@ -28,11 +28,10 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "designation":"Entree raparation os",
+    "designation":"Entree raparation pneu",
     "dateEntree":"12/01/2023",
     "dateSortie":"",
-    "voitureId":"63c8389632ff856d0763272f",
-    "repararions":[]
+    "voitureId":"63c8389632ff856d0763272f"
 }
 
 ###
@@ -72,7 +71,11 @@ Content-Type: application/json
 
 {
     "idClient":"63c7f866216d8bd09bbd40ba",
-    "numImmatricul":"4512sdf",
+    "numImmatricul":"2342sdf",
     "marque":"ford",
     "modele":"toyota"
 }
+
+###
+GET {{baseUrl}}/voitures/all HTTP/1.1
+Authorization: Bearer {{token}}

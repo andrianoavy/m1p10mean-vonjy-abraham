@@ -14,7 +14,7 @@ module.exports = {
         return collection.findOne(where);
     },
     findAll: async function () {
-        return collection.findOne();
+        return collection.find().toArray();
     },
     findAllWhere: async function (where) {
         return collection.find(where).toArray();
