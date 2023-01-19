@@ -31,12 +31,37 @@ module.exports = {
         const data = collection.aggregate([{
             $lookup: {
                 from: 'voitures',
-                LocalField: 'voitureId',
+                LocalField: new ObjectId(voitureId),
                 foreignField: '_id',
                 as: 'voiture'
             }
         }]);
         return data;
+        // return collection.aggregate([
+        //     {
+        //       $lookup: {
+        //         from: "voitures",
+        //         let: {
+        //           entreeId: "$_id"
+        //         },
+        //         pipeline: [
+        //           {
+        //             $match: {
+        //               $expr: {
+        //                 $eq: [
+        //                   {
+        //                     "$toObjectId": "$voitureId"
+        //                   },
+        //                   "$$entreeId"
+        //                 ]
+        //               }
+        //             }
+        //           }
+        //         ],
+        //         as: "entrees_data"
+        //       }
+        //     }
+        //   ])
     },
 
     updateSequenceValue: async function(sequenceName) {

@@ -41,19 +41,19 @@ recordRoutes.post('/api/atelier/entree', checkJwt, checkRole(Atelier), (req, res
 
 
 recordRoutes.post('/api/atelier/reparation', checkJwt, checkRole(Atelier), (req, res) => {
-    let newReparation;
-    let reparationId;
-    entreeDb.getValueForNextSequence('item_id')
-        .then((idSeq) => {
-            reparationId = idSeq;
-        }).catch((err) => {
-            return res.status(401).json({
-                message: 'id not found',
-            })
-        })
+    // let newReparation;
+    // let reparationId;
+    // entreeDb.getValueForNextSequence('item_id')
+    //     .then((idSeq) => {
+    //         reparationId = idSeq;
+    //     }).catch((err) => {
+    //         return res.status(401).json({
+    //             message: 'id not found',
+    //         })
+    //     })
 
-    newReparation = new Raparation(
-        reparationId, req.body.description, req.body.designationPrestation, req.body.montantPrestation, req.body.designationAchat, req.body.montantAchat, req.body.dateDebut, req.body.dateFin, "En attente"
+    const newReparation = new Raparation(
+        1, req.body.description, req.body.designationPrestation, req.body.montantPrestation, req.body.designationAchat, req.body.montantAchat, req.body.dateDebut, req.body.dateFin, "En attente"
     );
 
     entreeDb.saveReparation(req.body.entreeId, newReparation)

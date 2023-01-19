@@ -71,6 +71,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
                 token: jwtToken,
                 expiresIn: 3600,
                 _id: getUser._id,
+                role: getUser.role
             })
         })
         .catch((err) => {

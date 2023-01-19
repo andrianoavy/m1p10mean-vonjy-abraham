@@ -36,43 +36,42 @@ module.exports = {
                         bsonType: "array",
                         description: "'reparations' reparations dans une entrée d'une voiture",
 
+                    },
+                    'reparations.description': {
+                        bsonType: "string",
+                        description: "'reparation desciption'"
+                    },
+                    'reparations.designationPrestation': {
+                        bsonType: "string",
+                        description: "'devis'"
+                    },
+                    "reparations.montantPrestation": {
+                        bsonType: "double",
+                        minimun: 0,
+                        description: "'reparation desciption'"
+                    },
+                    "reparations.designationAchat": {
+                        bsonType: "string",
+                        description: "'reparation desciption'"
+                    },
+                    "reparations.montantAchat": {
+                        bsonType: "double",
+                        minimun: 0,
+                        description: "'reparation desciption'"
+                    },
+                    "reparations.dateDebut": {
+                        bsonType: "date",
+                        description: "'reparation desciption'"
+                    },
+                    'reparations.dateFin': {
+                        bsonType: "date",
+                        description: "'reparation desciption'"
+                    },
+                    'reparations.etat': {
+                        enum: ["En attente","En cours","Terminer"],
+                        description: "'reparation desciption'"
                     }
-                    // 'reparations.description': {
-                    //     bsonType: "string",
-                    //     description: "'reparation desciption'"
-                    // },
-                    // 'reparations.devis': {
-                    //     bsonType: "object",
-                    //     description: "'devis'"
-                    // },
-                    // "reparations.devis.prestation.designation": {
-                    //     bsonType: "string",
-                    //     description: "'reparation desciption'"
-                    // },
-                    // "reparations.devis.prestation.montant": {
-                    //     bsonType: "double",
-                    //     description: "'reparation desciption'"
-                    // },
-                    // "reparations.devis.achat.designation": {
-                    //     bsonType: "string",
-                    //     description: "'reparation desciption'"
-                    // },
-                    // "reparations.devis.achat.montant": {
-                    //     bsonType: "double",
-                    //     description: "'reparation desciption'"
-                    // },
-                    // 'reparations.etat': {
-                    //     bsonType: "string",
-                    //     description: "'reparation desciption'"
-                    // },
-                    // 'reparations.dateDebut': {
-                    //     bsonType: "date",
-                    //     description: "'reparation desciption'"
-                    // },
-                    // 'reparations.dateFin': {
-                    //     bsonType: "date",
-                    //     description: "'reparation desciption'"
-                    // }
+                    
                 }
             }
         }

@@ -1,7 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzU4Y2E1NjNhNTYzYWFjOTA5OGNkMCIsImlhdCI6MTY3NDAyOTI4NSwiZXhwIjoxNjc0MDMyODg1fQ.NzCVXigZDkX4tBZbmtltgxVkneNRSlMKbZlCSXHwnBo
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDA3MDYwNCwiZXhwIjoxNjc0MDc0MjA0fQ.Nb4v0tEWohQipNO0YYV1aYeCCv6Qbr01zZHYKfEdwyc
 
 ###
 POST {{baseUrl}}/auth/inscription HTTP/1.1
@@ -32,7 +31,7 @@ Content-Type: application/json
     "designation":"Entree raparation os",
     "dateEntree":"12/01/2023",
     "dateSortie":"",
-    "voitureId":"63c5935efd2fd2c4617e1573",
+    "voitureId":"63c8389632ff856d0763272f",
     "repararions":[]
 }
 
@@ -50,7 +49,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "entreeId":"63c6c500d3ff6cae60ca3770",
+    "entreeId":"63c839c532ff856d07632730",
     "description":"reparation cabine",
     "designationPrestation":"Main d'ouevre",
     "montantPrestation":200000,
@@ -64,3 +63,16 @@ Content-Type: application/json
 
 GET {{baseUrl}}/api/atelier/entree/reparations?id=63c6c500d3ff6cae60ca3770 HTTP/1.1
 Authorization: Bearer {{token}}
+
+
+###
+POST {{baseUrl}}/voitures HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "idClient":"63c7f866216d8bd09bbd40ba",
+    "numImmatricul":"4512sdf",
+    "marque":"ford",
+    "modele":"toyota"
+}
