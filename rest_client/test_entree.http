@@ -30,10 +30,10 @@ Content-Type: application/json
 {
     "designation":"Entree raparation pneu",
     "dateEntree":"12/01/2023",
-    "dateSortie":"",
-    "voitureId":"63c8389632ff856d0763272f"
+    "voitureId":"63c9416d48d5ac69718d5784"
 }
 
+    # "voitureId":"63c8389632ff856d0763272f"
 ###
 GET {{baseUrl}}/api/atelier/entrees HTTP/1.1
 Authorization: Bearer {{token}}

@@ -1,10 +1,12 @@
+const {ObjectId} = require('bson')
 module.exports = {
     Entree: class {
         constructor(designation, dateEntree, dateSortie, voitureId, reparations) {
             this.designation = designation;
-            this.dateEntree = dateEntree;
-            this.dateSortie = dateSortie;
-            this.voitureId = voitureId;
+            this.dateEntree = new Date(dateEntree);
+            if(dateSortie)
+                this.dateSortie = new Date(dateSortie);
+            this.voitureId = new ObjectId(voitureId);
             this.reparations = reparations;
         }
     },
@@ -20,7 +22,7 @@ module.exports = {
                         bsonType: "date",
                         description: "'date d'entree' doit être une date"
                     },
-                    dateEntree: {
+                    dateSortie: {
                         bsonType: "date",
                         description: "'date de sortie' doit être une date"
                     },
@@ -47,7 +49,7 @@ module.exports = {
                     },
                     "reparations.montantPrestation": {
                         bsonType: "double",
-                        minimun: 0,
+                        minimum: 0,
                         description: "'reparation desciption'"
                     },
                     "reparations.designationAchat": {
@@ -56,7 +58,7 @@ module.exports = {
                     },
                     "reparations.montantAchat": {
                         bsonType: "double",
-                        minimun: 0,
+                        minimum: 0,
                         description: "'reparation desciption'"
                     },
                     "reparations.dateDebut": {
