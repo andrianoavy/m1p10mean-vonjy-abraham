@@ -30,13 +30,42 @@ module.exports = {
     findEntreeWithCar: async function() {
         const data = collection.aggregate([{
             $lookup: {
-                from: 'voitures',
-                LocalField: new ObjectId(voitureId),
+                from: 'Voitures',
+                localField: 'voitureId',
                 foreignField: '_id',
                 as: 'voiture'
             }
         }]);
+<<<<<<< HEAD
         return data;
+=======
+        return data.toArray();
+        // return collection.aggregate([
+        //     {
+        //       $lookup: {
+        //         from: "voitures",
+        //         let: {
+        //           entreeId: "$_id"
+        //         },
+        //         pipeline: [
+        //           {
+        //             $match: {
+        //               $expr: {
+        //                 $eq: [
+        //                   {
+        //                     "$toObjectId": "$voitureId"
+        //                   },
+        //                   "$$entreeId"
+        //                 ]
+        //               }
+        //             }
+        //           }
+        //         ],
+        //         as: "entrees_data"
+        //       }
+        //     }
+        //   ])
+>>>>>>> 70ccd39da6b629846a726869ce4b44ec52a8f2ab
     },
 
     updateSequenceValue: async function(sequenceName) {

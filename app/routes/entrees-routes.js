@@ -16,7 +16,7 @@ const baseRoute = '/api'
 
 let { AllUsers, Client, ClientAtelier, ClientFinancier, Atelier, Financier, Atelierfinancier } = require('../utils/role');
 
-recordRoutes.post('/api/atelier/entree', checkJwt, checkRole(Atelier), (req, res) => {
+recordRoutes.post('/api/atelier/entree', /*checkJwt, checkRole(Atelier),*/ (req, res) => {
     const newEntree = new Entree(
         req.body.designation, req.body.dateEntree, req.body.dateSortie, req.body.voitureId, []
     );
@@ -33,6 +33,8 @@ recordRoutes.post('/api/atelier/entree', checkJwt, checkRole(Atelier), (req, res
                 data: entree
             })
         }).catch((err) => {
+            console.log(err.errInfo.details.schemaRulesNotSatisfied[0].propertiesNotSatisfied);
+            throw new Error(err)
             return res.status(401).json({
                 message: 'Enregistrement de l\'information échouée',
             })
@@ -40,7 +42,7 @@ recordRoutes.post('/api/atelier/entree', checkJwt, checkRole(Atelier), (req, res
 })
 
 
-recordRoutes.post('/api/atelier/reparation', checkJwt, checkRole(Atelier), (req, res) => {
+recordRoutes.post('/api/atelier/reparation', /*checkJwt, checkRole(Atelier),*/ (req, res) => {
     // let newReparation;
     // let reparationId;
     // entreeDb.getValueForNextSequence('item_id')
@@ -74,8 +76,9 @@ recordRoutes.post('/api/atelier/reparation', checkJwt, checkRole(Atelier), (req,
         })
 })
 
-recordRoutes.get('/api/atelier/entrees', checkJwt, checkRole(Atelier), (req, res) => {
-    entreeDb.getAll()
+recordRoutes.get('/api/atelier/entrees', /*checkJwt, checkRole(Atelier),*/ (req, res) => {
+    entreeDb.findEntreeWithCar()
+    // entreeDb.getAll()
         .then((entree) => {
             if (!entree) {
                 return res.status(401).json({
@@ -87,6 +90,7 @@ recordRoutes.get('/api/atelier/entrees', checkJwt, checkRole(Atelier), (req, res
                 data: entree
             })
         }).catch((err) => {
+            throw new Error(err)
             return res.status(401).json({
                 message: 'error',
             })

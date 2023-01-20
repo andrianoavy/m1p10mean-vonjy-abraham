@@ -1,7 +1,7 @@
 const { ObjectId } = require('bson');
 
 const dbo = require('../config/connection').getDb()
-const collection = dbo.collection('Voitures')
+const collection = dbo.collection('voitures')
 
 module.exports = {
     saveOne: async function (voiture) {
