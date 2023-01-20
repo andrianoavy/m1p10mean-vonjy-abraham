@@ -64,18 +64,7 @@ recordRoutes.post(
 
 recordRoutes.post(
   "/api/atelier/reparation",
-  /*checkJwt, checkRole(Atelier),*/ (req, res) => {
-    // let newReparation;
-    // let reparationId;
-    // entreeDb.getValueForNextSequence('item_id')
-    //     .then((idSeq) => {
-    //         reparationId = idSeq;
-    //     }).catch((err) => {
-    //         return res.status(401).json({
-    //             message: 'id not found',
-    //         })
-    //     })
-
+  checkJwt, checkRole(Atelier), (req, res) => {
     const newReparation = new Raparation(
       ObjectId(),
       req.body.description,
