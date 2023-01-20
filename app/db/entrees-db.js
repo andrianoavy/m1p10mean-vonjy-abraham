@@ -37,31 +37,6 @@ module.exports = {
             }
         }]);
         return data;
-        // return collection.aggregate([
-        //     {
-        //       $lookup: {
-        //         from: "voitures",
-        //         let: {
-        //           entreeId: "$_id"
-        //         },
-        //         pipeline: [
-        //           {
-        //             $match: {
-        //               $expr: {
-        //                 $eq: [
-        //                   {
-        //                     "$toObjectId": "$voitureId"
-        //                   },
-        //                   "$$entreeId"
-        //                 ]
-        //               }
-        //             }
-        //           }
-        //         ],
-        //         as: "entrees_data"
-        //       }
-        //     }
-        //   ])
     },
 
     updateSequenceValue: async function(sequenceName) {
