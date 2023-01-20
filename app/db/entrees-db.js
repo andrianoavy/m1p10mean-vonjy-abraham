@@ -30,7 +30,7 @@ module.exports = {
     findEntreeWithCar: async function() {
         const data = collection.aggregate([{
             $lookup: {
-                from: 'Voitures',
+                from: 'voitures',
                 localField: 'voitureId',
                 foreignField: '_id',
                 as: 'voiture'

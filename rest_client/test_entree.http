@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDE5NzQxMywiZXhwIjoxNjc0MjAxMDEzfQ.Fccc1pCpaLZGGHQI7NaJomI0NryPzt40ypc-Xhz2g6o
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDIxNTYwNywiZXhwIjoxNjc0MjE5MjA3fQ.oHTO_K1ttfSsos1HvsfdzIeLl72BloaJbo6gQBtGLps
 
 ###
 POST {{baseUrl}}/auth/inscription HTTP/1.1
@@ -28,9 +28,9 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "designation":"Entree raparation moteur",
+    "designation":"Entree raparation pont",
     "dateEntree":"12/01/2023",
-    "voitureId":"63c9416d48d5ac69718d5784"
+    "voitureId":"63ca5a1c0e940ba53906baad"
 }
 
     # "voitureId":"63c8389632ff856d0763272f"
@@ -48,8 +48,8 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "entreeId":"63c922b6419aa024c25c80fe",
-    "description":"reparation cabine",
+    "entreeId":"63ca5b300e940ba53906bab0",
+    "description":"reparation pneu",
     "designationPrestation":"Main d'ouevre",
     "montantPrestation":200000,
     "designationAchat":"Achat piston",
