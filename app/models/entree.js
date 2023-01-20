@@ -1,14 +1,5 @@
 const {ObjectId} = require('bson')
 module.exports = {
-<<<<<<< HEAD
-  Entree: class {
-    constructor(designation, dateEntree, dateSortie, voitureId, reparations) {
-      this.designation = designation;
-      this.dateEntree = dateEntree;
-      this.dateSortie = dateSortie;
-      this.voitureId = voitureId;
-      this.reparations = reparations;
-=======
     Entree: class {
         constructor(designation, dateEntree, dateSortie, voitureId, reparations) {
             this.designation = designation;
@@ -86,84 +77,7 @@ module.exports = {
                 }
             }
         }
->>>>>>> 70ccd39da6b629846a726869ce4b44ec52a8f2ab
     }
-  },
-  collectionName: "entrees",
-  options: {
-    validator: {
-      $jsonSchema: {
-        bsonType: "object",
-        title: "entree validation",
-        required: ["dateEntree", "voitureId"],
-        properties: {
-          dateEntree: {
-            bsonType: "date",
-            description: "'date d'entree' doit être une date"
-          },
-          dateEntree: {
-            bsonType: "date",
-            description: "'date de sortie' doit être une date"
-          },
-          designation: {
-            bsonType: "string",
-            description: "'designation' doit être une chaine de caractère"
-          },
-          voitureId: {
-            bsonType: "objectId",
-            description: "'objectId' doit être une id dans le document voitures"
-          },
-          reparations: {
-            bsonType: "array",
-            items: {
-              bsonType: "object",
-              required: [
-                "repatationId",
-                "designationPrestation",
-                "montantPrestation",
-                "designationAchat",
-                "montantAchat",
-                "dateDebut",
-                "Etat"
-              ],
-              additionalProperties: false,
-              description: "'items' must contain the stated fields.",
-              properties: {
-                reparationId: {
-                  bsonType: "objectId",
-                  description: "'reparationId' must be objectId"
-                },
-                description: {
-                  bsonType: "string",
-                  description: "description reparation"
-                },
-                designationPrestation: {
-                  bsonType: "string",
-                  description: "designationPrestation"
-                },
-                montantPrestation: {
-                  bsonType: "double",
-                  description: "montantPrestation"
-                },
-                designationAchat: {
-                  bsonType: "string",
-                  description: "designationAchat"
-                },
-                montantAchat: {
-                  bsonType: "double",
-                  description: "montantAchat"
-                },
-                dateDebut: {
-                  bsonType: "date",
-                  description: "dateDebut"
-                },
-                dateFin: {
-                  bsonType: "date",
-                  description: "dateDebut"
-                },
-                Etat: {
-                  enum: ["En attente", "En cours", "Terminer"],
-                  description: "Etat reparation"
                 }
               }
             }
