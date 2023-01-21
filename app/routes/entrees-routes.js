@@ -55,9 +55,6 @@ recordRoutes.post(
           err.errInfo.details.schemaRulesNotSatisfied[0].propertiesNotSatisfied
         );
         throw new Error(err);
-        return res.status(401).json({
-          message: "Enregistrement de l'information échouée"
-        });
       });
   }
 );
