@@ -28,7 +28,7 @@ let {
 
 recordRoutes.post(
   "/api/atelier/entree",
-  /*checkJwt, checkRole(Atelier),*/ (req, res) => {
+  checkJwt, checkRole(Atelier), (req, res) => {
     const newEntree = new Entree(
       req.body.designation,
       req.body.dateEntree,

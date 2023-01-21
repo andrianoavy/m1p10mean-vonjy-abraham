@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDIxNTYwNywiZXhwIjoxNjc0MjE5MjA3fQ.oHTO_K1ttfSsos1HvsfdzIeLl72BloaJbo6gQBtGLps
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDI4ODM2MSwiZXhwIjoxNjc0MjkxOTYxfQ.8yMt2ngwGoZ4mZXp7sAGcR468tsQ_-GpdxOFmYP93J4
 
 ###
 POST {{baseUrl}}/auth/inscription HTTP/1.1
@@ -60,7 +60,7 @@ Content-Type: application/json
 
 ###
 
-GET {{baseUrl}}/api/atelier/entree/reparations?id=63c922b6419aa024c25c80fe HTTP/1.1
+GET {{baseUrl}}/api/atelier/entree/reparations?id=63ca5b300e940ba53906bab0 HTTP/1.1
 Authorization: Bearer {{token}}
 
 
