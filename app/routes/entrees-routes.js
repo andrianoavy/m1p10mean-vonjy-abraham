@@ -12,7 +12,7 @@ const entreeDb = require("../db/entrees-db");
 const checkJwt = require("../middlewares/checkJwt");
 const checkRole = require("../middlewares/checkRole");
 
-const{ObjectId} = require('bson')
+const { ObjectId } = require("bson");
 
 const baseRoute = "/api";
 
@@ -28,7 +28,9 @@ let {
 
 recordRoutes.post(
   "/api/atelier/entree",
-  checkJwt, checkRole(Atelier), (req, res) => {
+  checkJwt,
+  checkRole(Atelier),
+  (req, res) => {
     const newEntree = new Entree(
       req.body.designation,
       req.body.dateEntree,
@@ -61,7 +63,9 @@ recordRoutes.post(
 
 recordRoutes.post(
   "/api/atelier/reparation",
-  checkJwt, checkRole(Atelier), (req, res) => {
+  checkJwt,
+  checkRole(Atelier),
+  (req, res) => {
     const newReparation = new Raparation(
       ObjectId(),
       req.body.description,
@@ -134,12 +138,64 @@ recordRoutes.get(
         }
         res.status(200).json({
           status: "Success",
-          data: reparation
+          data: reparation.reparations
         });
       })
       .catch((err) => {
         return res.status(401).json({
           message: "Impossible de touver des reparations"
+        });
+      });
+  }
+);
+
+recordRoutes.put(
+  "/api/atelier/update/reparation",
+  checkJwt,
+  checkRole(Atelier),
+  (req, res) => {
+    entreeDb
+      .updateReparation(req.body.entreeId, req.body.reparationId)
+      .then((reparation) => {
+        if (!reparation) {
+          return res.status(401).json({
+            message: "Modification échouée"
+          });
+        }
+        res.status(200).json({
+          status: "Success",
+          data: reparation
+        });
+      })
+      .catch((err) => {
+        return res.status(401).json({
+          message: "Modification de l'information échouée"
+        });
+      });
+  }
+);
+
+recordRoutes.get(
+  "/api/atelier/entree/info",
+  checkJwt,
+  checkRole(AllUsers),
+  (req, res) => {
+    entreeDb
+      .getOneById(req.query.id)
+      .then((result) => {
+        if (!result) {
+          return res.status(401).json({
+            message: "Impossible de trouver d'une entree"
+          });
+        }
+        res.status(200).json({
+          status: "Success",
+          data: result
+        });
+      })
+      .catch((err) => {
+        return res.status(401).json({
+          message: "Impossible de trouver des entrees"
         });
       });
   }

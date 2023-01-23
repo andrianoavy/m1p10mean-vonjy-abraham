@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDI4ODM2MSwiZXhwIjoxNjc0MjkxOTYxfQ.8yMt2ngwGoZ4mZXp7sAGcR468tsQ_-GpdxOFmYP93J4
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDQ3OTg0OCwiZXhwIjoxNjc0NDgzNDQ4fQ.ZSldRaA8TDG21Tp0Q8-BQUSERrpUVPyrs82A3JldLNA
 
 ###
 POST {{baseUrl}}/auth/inscription HTTP/1.1
@@ -78,4 +78,19 @@ Content-Type: application/json
 
 ###
 GET {{baseUrl}}/voitures/all HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+PUT {{baseUrl}}/api/atelier/update/reparation HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "entreeId":"63ca5b300e940ba53906bab0",
+    "reparationId":"63ca81be08b1f4b4a1fa71cf"
+}
+
+###
+
+GET {{baseUrl}}/api/atelier/entree/info?id=63ca5be34e0f654ce07d4182 HTTP/1.1
 Authorization: Bearer {{token}}
