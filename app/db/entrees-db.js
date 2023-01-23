@@ -39,11 +39,5 @@ module.exports = {
         return data.toArray();
     },
 
-    updateSequenceValue: async function(sequenceName) {
-        return dbo.collection('sample').update({ _id: sequenceName }, { $inc: { sequence_value: 1 } })
-    },
-
-    getValueForNextSequence: async function() {
-        return dbo.collection('sample').findOne();
-    }
+    
 }

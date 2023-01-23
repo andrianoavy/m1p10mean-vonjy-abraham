@@ -120,32 +120,6 @@ recordRoutes.get(
 );
 
 recordRoutes.get(
-  "/api/atelier/entrees/car",
-//   checkJwt,
-//   checkRole(Atelier),
-  (req, res) => {
-    entreeDb
-      .findEntreeWithCar()
-      .then((entree) => {
-        if (!entree) {
-          return res.status(401).json({
-            message: "Pas de resultat"
-          });
-        }
-        res.status(200).json({
-          status: "Success",
-          data: entree
-        });
-      })
-      .catch((err) => {
-        return res.status(401).json({
-          message: "error"
-        });
-      });
-  }
-);
-
-recordRoutes.get(
   "/api/atelier/entree/reparations",
   checkJwt,
   checkRole(Atelier),
