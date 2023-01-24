@@ -7,7 +7,7 @@ module.exports = {
             this.role = role;
         }
     },
-    collectionName:"Users",
+    collectionName:"users",
     options: {
         validator: {
             $jsonSchema: {
@@ -35,5 +35,5 @@ module.exports = {
             }
         }
     },
-    indexes:[{indexInfo:{ "email": 1 },isUnique:true}]
+    indexes:[{indexInfo:{ "email": 1 },isUnique:true}],
 }

@@ -1,14 +1,17 @@
+const { Double } = require("mongodb");
+
 module.exports = {
-    Raparation: class {
+    Reparation: class {
         constructor(reparationId, description, designationPrestation, montantPrestation, designationAchat, montantAchat, dateDebut, dateFin, Etat) {
             this.reparationId = reparationId;
             this.description = description;
             this.designationPrestation = designationPrestation;
-            this.montantPrestation = montantPrestation;
+            this.montantPrestation = new Double(montantPrestation);
             this.designationAchat = designationAchat;
-            this.montantAchat = montantAchat;
+            this.montantAchat = new Double(montantAchat);
             this.dateDebut = new Date(dateDebut);
-            this.dateFin = new Date(dateFin);
+            if (dateFin)
+                this.dateFin = new Date(dateFin);
             this.Etat = Etat;
         }
     }

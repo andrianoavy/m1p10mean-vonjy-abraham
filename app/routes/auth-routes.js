@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const bodyParser = require('body-parser')
+const clientRole = require('../utils/role').Client
 
 const recordRoutes = require('express').Router()
 
@@ -27,6 +28,8 @@ recordRoutes.route(`${baseRoute}/inscription`).post(async function(req, res) {
             //Hard coder le client
             req.body.role || "Client"
         );
+        user.telephone = req.body.telephone,
+        user.adresse = req.body.adresse
         userDb.saveOne(user)
             .then((result) => res.json(result))
             .catch((err) => {

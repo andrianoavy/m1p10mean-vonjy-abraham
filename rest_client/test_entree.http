@@ -1,6 +1,10 @@
 @baseUrl = http://localhost:3000
 
+<<<<<<< HEAD
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDQ3OTg0OCwiZXhwIjoxNjc0NDgzNDQ4fQ.ZSldRaA8TDG21Tp0Q8-BQUSERrpUVPyrs82A3JldLNA
+=======
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzY2Y4MzRlZGE3NDVjZjkzMTE3OTIxYiIsImlhdCI6MTY3NDU0Mzk1NywiZXhwIjoxNjc0NTQ3NTU3fQ.iaZk3a4JdVZD7P188egIcDxs9sr2XAWsGK69oyrRI_s
+>>>>>>> origin/client/details-voiture
 
 ###
 POST {{baseUrl}}/auth/inscription HTTP/1.1
