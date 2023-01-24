@@ -5,7 +5,7 @@ const db = require('../db/voitures-db');
 const authorize = require('../middlewares/auth-middlewares');
 const { Voiture } = require('../models/voiture');
 
-const baseRoute = '/voitures'
+const baseRoute = '/api/voitures'
 
 recordRoutes.get(`${baseRoute}`, authorize, function (req, res) {
 

@@ -7,7 +7,7 @@ module.exports = {
             this.role = role;
         }
     },
-    collectionName:"Users",
+    collectionName:"users",
     options: {
         validator: {
             $jsonSchema: {

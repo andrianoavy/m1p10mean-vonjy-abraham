@@ -19,7 +19,7 @@ module.exports = {
       this.modele = modele;
     }
   },
-  collectionName: "Voitures",
+  collectionName: "voitures",
   options: {
     validator: {
       $jsonSchema: {
@@ -53,7 +53,7 @@ module.exports = {
     {
       $lookup:
       {
-        from: "Users",
+        from: "users",
         localField: "_idUser",
         foreignField: "_id",
         as: "user"
