@@ -15,11 +15,60 @@ module.exports = {
         return collection.find({ name: username });
     },
 
-    saveOne: async function(sale) {
-        return collection.insertOne(sale);
+    saveOne: async function(entree) {
+        return collection.insertOne(entree);
     },
 
-    saveRepartion: async function(entreeId, reparation) {
-        return
+    saveReparation: async function(entreeId, reparation) {
+        return collection.updateOne({ _id: new ObjectId(entreeId) }, { $push: { reparations: reparation } })
+    },
+
+    getAllReparationByEntree: async function(entreeId) {
+        return collection.findOne({ _id: new ObjectId(entreeId) });
+    },
+
+    findEntreeWithCar: async function() {
+        const data = collection.aggregate([{
+            $lookup: {
+                from: 'Voitures',
+                localField: 'voitureId',
+                foreignField: '_id',
+                as: 'voiture'
+            }
+        }]);
+        return data.toArray();
+        // return collection.aggregate([
+        //     {
+        //       $lookup: {
+        //         from: "voitures",
+        //         let: {
+        //           entreeId: "$_id"
+        //         },
+        //         pipeline: [
+        //           {
+        //             $match: {
+        //               $expr: {
+        //                 $eq: [
+        //                   {
+        //                     "$toObjectId": "$voitureId"
+        //                   },
+        //                   "$$entreeId"
+        //                 ]
+        //               }
+        //             }
+        //           }
+        //         ],
+        //         as: "entrees_data"
+        //       }
+        //     }
+        //   ])
+    },
+
+    updateSequenceValue: async function(sequenceName) {
+        return dbo.collection('sample').update({ _id: sequenceName }, { $inc: { sequence_value: 1 } })
+    },
+
+    getValueForNextSequence: async function() {
+        return dbo.collection('sample').findOne();
     }
 }

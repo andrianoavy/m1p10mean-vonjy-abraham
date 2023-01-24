@@ -1,0 +1,81 @@
+@baseUrl = http://localhost:3000
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDExNTUzMiwiZXhwIjoxNjc0MTE5MTMyfQ.rs7AUtxdHPN07RYUB-tqyy9CEv1PP4_XworllqPOBqQ
+
+###
+POST {{baseUrl}}/auth/inscription HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"Jean",
+    "email":"jean@gmail.com",
+    "password":"123456",
+    "role":"Atelier"
+}
+###
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"jean@gmail.com",
+    "password":"123456"
+}
+
+###
+
+POST  {{baseUrl}}/api/atelier/entree HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "designation":"Entree raparation pneu",
+    "dateEntree":"12/01/2023",
+    "voitureId":"63c9416d48d5ac69718d5784"
+}
+
+    # "voitureId":"63c8389632ff856d0763272f"
+###
+GET {{baseUrl}}/api/atelier/entrees HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/atelier/entrees/car HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+POST  {{baseUrl}}/api/atelier/reparation HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "entreeId":"63c839c532ff856d07632730",
+    "description":"reparation cabine",
+    "designationPrestation":"Main d'ouevre",
+    "montantPrestation":200000,
+    "designationAchat":"Achat piston",
+    "montantAchat":500000,
+    "dateDebut":"23/01/2023",
+    "dateFin":"26/01/2023"
+}
+
+###
+
+GET {{baseUrl}}/api/atelier/entree/reparations?id=63c6c500d3ff6cae60ca3770 HTTP/1.1
+Authorization: Bearer {{token}}
+
+
+###
+POST {{baseUrl}}/voitures HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "idClient":"63c7f866216d8bd09bbd40ba",
+    "numImmatricul":"2342sdf",
+    "marque":"ford",
+    "modele":"toyota"
+}
+
+###
+GET {{baseUrl}}/voitures/all HTTP/1.1
+Authorization: Bearer {{token}}

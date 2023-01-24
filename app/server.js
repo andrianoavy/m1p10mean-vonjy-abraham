@@ -4,7 +4,8 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = require('express')();
 
-const { connectDb } = require('./config/connection')
+const { connectDb } = require('./config/connection');
+
 
 const port = process.env.PORT || 3000;
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 connectDb(() => {
     //Atao eto ny require Routes
+    app.use(require('./routes/entrees-routes'))
     app.use(require('./routes/auth-routes'))
     app.use(require('./routes/voitures-routes'))
 

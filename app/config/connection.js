@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient
 
-const {createCollections} = require('../config/collections')
+const { createCollections } = require('../config/collections')
 
 const connectionString = process.env.MONGODB_CONNECTION_STRING || "mongodb://localhost:27017/"
 

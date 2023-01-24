@@ -33,8 +33,17 @@ recordRoutes.get(`${baseRoute}`, authorize, function (req, res) {
         })
 });
 
-recordRoutes.post(`${baseRoute}`, authorize, function (req, res) {
+recordRoutes.get('/voitures/all',authorize,function(req,res){
+    db.findAll()
+    .then((result) => res.json(result))
+    .catch((err) => {
+        console.log(err);
+        res.status(400).send("Error fetching listings!")
+    })
+});
 
+recordRoutes.post(`${baseRoute}`, authorize ,function(req, res) {
+    
     const voiture = new Voiture(
         req.body.numImmatricul,
         req.body.marque,
