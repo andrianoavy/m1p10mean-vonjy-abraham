@@ -8,7 +8,7 @@ const { Voiture } = require('../models/voiture');
 
 const baseRoute = '/api/voitures'
 
-recordRoutes.get(`${baseRoute}/:immatriculation`, authorize, function (req, res) {
+recordRoutes.get(`${baseRoute}/client/:immatriculation`, authorize, function (req, res) {
 
     const immatriculation = req.params.immatriculation
     const userId = req.payload.userId
@@ -50,7 +50,7 @@ recordRoutes.get(`${baseRoute}`, authorize, function (req, res) {
         })
 });
 
-recordRoutes.get('/voitures/all', authorize, function (req, res) {
+recordRoutes.get('/api/voitures/all', authorize, function (req, res) {
     db.findAll()
         .then((result) => res.json(result))
         .catch((err) => {
