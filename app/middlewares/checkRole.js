@@ -6,7 +6,7 @@ function checkRole(roles) {
             const id = req.jwtPayLoad.userId;
 
 
-            usersDb.getOneById(id)
+            usersDb.findOneById(id)
                 .then((result) => {
                         // user_role = result.role
                         let isValid = false;
