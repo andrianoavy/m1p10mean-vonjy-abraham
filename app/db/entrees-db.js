@@ -20,6 +20,7 @@ module.exports = {
     },
 
     saveReparation: async function(entreeId, reparation) {
+        const [id, push] = [{ _id: new ObjectId(entreeId) },{ $push: { reparations: reparation } }]
         return collection.updateOne({ _id: new ObjectId(entreeId) }, { $push: { reparations: reparation } })
     },
 

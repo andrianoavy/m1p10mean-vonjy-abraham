@@ -1,0 +1,20 @@
+@baseUrl = http://127.0.0.1:3000/voitures
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWJyYWhhbSIsInVzZXJJZCI6IjYzYzA4ZDAzNGU2Yjg4OGExMTEzNGNiNSIsImlhdCI6MTY3Mzg3NDkzMSwiZXhwIjoxNjczODc4NTMxfQ.G67QuEmfsxXpwGEnO4zdHQv6WXrKe9PA-gHFfILI82g
+
+###
+#Get All
+GET {{baseUrl}} HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+#Create
+POST {{baseUrl}} HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "idClient":"63c520f549d69a811c19eea7",
+    "numImmatricul":"0406TAC",
+    "marque":"Peugeot",
+    "modele":"406"
+}

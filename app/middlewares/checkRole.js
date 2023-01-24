@@ -1,4 +1,4 @@
-const usersDb = require('../db/sales-db')
+const usersDb = require('../db/users-db')
 
 function checkRole(roles) {
     return checkRole[roles] || (checkRole[roles] =

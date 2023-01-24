@@ -1,0 +1,41 @@
+@baseUrl = http://127.0.0.1:3000/api/voitures
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWJyYWhhbTIiLCJ1c2VySWQiOiI2M2M4MWFkOTY3NDEzMzRhZmM1YmQ4NmIiLCJpYXQiOjE2NzQ1NDQ4MTksImV4cCI6MTY3NDU0ODQxOX0.dZ0bT1L9IeIhT6FCOxnhVjPmMlms1V4bEjFDyuWCdiw
+
+
+###
+#Get All
+GET {{baseUrl}} HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+#Create
+POST {{baseUrl}} HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "idClient":"63c520f549d69a811c19eea7",
+    "numImmatricul":"0406TAC",
+    "marque":"Peugeot",
+    "modele":"406"
+}
+
+###
+GET {{baseUrl}}/0405%20TAC HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+###
+POST  http://127.0.0.1:3000/api/atelier/reparation HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "entreeId":"63ca5257614a07a6eb5e4d93",
+    "description":"reparation cabine",
+    "designationPrestation":"Main d'ouevre",
+    "montantPrestation":200000,
+    "designationAchat":"Achat piston",
+    "montantAchat":500000,
+    "dateDebut":"23/01/2023"
+}

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const recordRoutes = require('express').Router()
 
 const { Entree } = require('../models/entree')
-const { Raparation } = require('../models/reparation')
+const { Reparation } = require('../models/reparation')
 
 const entreeDb = require('../db/entrees-db')
 
@@ -54,7 +54,7 @@ recordRoutes.post('/api/atelier/reparation', /*checkJwt, checkRole(Atelier),*/ (
     //         })
     //     })
 
-    const newReparation = new Raparation(
+    const newReparation = new Reparation(
         1, req.body.description, req.body.designationPrestation, req.body.montantPrestation, req.body.designationAchat, req.body.montantAchat, req.body.dateDebut, req.body.dateFin, "En attente"
     );
 
@@ -70,9 +70,10 @@ recordRoutes.post('/api/atelier/reparation', /*checkJwt, checkRole(Atelier),*/ (
                 data: reparation
             })
         }).catch((err) => {
-            return res.status(401).json({
+            res.status(401).json({
                 message: 'Enregistrement de l\'information échouée',
             })
+            throw err;
         })
 })
 

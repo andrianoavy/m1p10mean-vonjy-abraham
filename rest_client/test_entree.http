@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDExNTUzMiwiZXhwIjoxNjc0MTE5MTMyfQ.rs7AUtxdHPN07RYUB-tqyy9CEv1PP4_XworllqPOBqQ
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzY2Y4MzRlZGE3NDVjZjkzMTE3OTIxYiIsImlhdCI6MTY3NDU0Mzk1NywiZXhwIjoxNjc0NTQ3NTU3fQ.iaZk3a4JdVZD7P188egIcDxs9sr2XAWsGK69oyrRI_s
 
 ###
 POST {{baseUrl}}/auth/inscription HTTP/1.1

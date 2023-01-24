@@ -1,0 +1,49 @@
+@baseUrl = http://localhost:3000/auth
+@token =  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWJyYWhhbSIsInVzZXJJZCI6IjYzYzA4ZDAzNGU2Yjg4OGExMTEzNGNiNSIsImlhdCI6MTY3Mzg1NzY3MSwiZXhwIjoxNjczODYxMjcxfQ.VLLq-BybB3OUQBNWxhWE3PnVATSUosFgTts0Ctsn7ME
+
+###
+
+GET {{baseUrl}} HTTP/1.1 
+
+###
+#Inscription
+POST {{baseUrl}}/inscription HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Abraham2",
+    "email":"abrahamramilison+andrianoavy@gmail.com",
+    "password":"123456",
+    "telephone":"0349016630",
+    "adresse":"test adresse"
+}
+
+###
+#Login
+POST {{baseUrl}}/login HTTP/1.1
+content-type: application/json
+
+{
+    "email":"abrahamramilison+andrianoavy@gmail.com",
+    "password":"123456"
+}
+
+###
+
+POST  http://localhost:3000/sales HTTP/1.1
+Authorization:Bearer {{token}}
+content-type: application/json
+
+{
+    "item":"abcd",
+    "price":"10000000"
+}
+
+###
+
+GET  http://localhost:3000/sales/63c08eeb1254a68a893745d8 HTTP/1.1
+Authorization:Bearer {{token}}
+###
+
+GET  http://localhost:3000/sales HTTP/1.1
+Authorization:Bearer {{token}}

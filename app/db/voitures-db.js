@@ -25,12 +25,32 @@ module.exports = {
     },
     findAllSearchByClient: async function (idUser, search) {
         return collection.find({
-            _idUser: new ObjectId(idUser), 
-            $or:[
-                {"numImmatricul" : {$regex : `.*${search}.*`,$options:'i'}},
-                {"marque" : {$regex : `.*${search}.*`,$options:'i'}},
-                {"model" : {$regex : `.*${search}.*`,$options:'i'}},
+            _idUser: new ObjectId(idUser),
+            $or: [
+                { "numImmatricul": { $regex: `.*${search}.*`, $options: 'i' } },
+                { "marque": { $regex: `.*${search}.*`, $options: 'i' } },
+                { "model": { $regex: `.*${search}.*`, $options: 'i' } },
             ]
         }).toArray();
+    },
+    findOneWithEntree: async function (where) {
+        return collection.aggregate([
+            { $match: { ...where }, },
+            {
+                $lookup:
+                {
+                    from: "entrees",
+                    localField: "_id",
+                    foreignField: "voitureId",
+                    as: "entree",
+                    pipeline: [ {
+                        $match: {
+                           dateSortie:null,
+                        }
+                     } ],
+                },
+            },
+            { $limit: 1 }
+        ]).toArray();
     }
 }
