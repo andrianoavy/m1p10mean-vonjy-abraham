@@ -1,7 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzU4Y2E1NjNhNTYzYWFjOTA5OGNkMCIsImlhdCI6MTY3NDAyOTI4NSwiZXhwIjoxNjc0MDMyODg1fQ.NzCVXigZDkX4tBZbmtltgxVkneNRSlMKbZlCSXHwnBo
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDQ3OTg0OCwiZXhwIjoxNjc0NDgzNDQ4fQ.ZSldRaA8TDG21Tp0Q8-BQUSERrpUVPyrs82A3JldLNA
 
 ###
 POST {{baseUrl}}/auth/inscription HTTP/1.1
@@ -29,13 +28,12 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "designation":"Entree raparation os",
+    "designation":"Entree raparation pont",
     "dateEntree":"12/01/2023",
-    "dateSortie":"",
-    "voitureId":"63c5935efd2fd2c4617e1573",
-    "repararions":[]
+    "voitureId":"63ca5a1c0e940ba53906baad"
 }
 
+    # "voitureId":"63c8389632ff856d0763272f"
 ###
 GET {{baseUrl}}/api/atelier/entrees HTTP/1.1
 Authorization: Bearer {{token}}
@@ -50,8 +48,8 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "entreeId":"63c6c500d3ff6cae60ca3770",
-    "description":"reparation cabine",
+    "entreeId":"63ca5b300e940ba53906bab0",
+    "description":"reparation pneu",
     "designationPrestation":"Main d'ouevre",
     "montantPrestation":200000,
     "designationAchat":"Achat piston",
@@ -62,5 +60,37 @@ Content-Type: application/json
 
 ###
 
-GET {{baseUrl}}/api/atelier/entree/reparations?id=63c6c500d3ff6cae60ca3770 HTTP/1.1
+GET {{baseUrl}}/api/atelier/entree/reparations?id=63ca5b300e940ba53906bab0 HTTP/1.1
+Authorization: Bearer {{token}}
+
+
+###
+POST {{baseUrl}}/voitures HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "idClient":"63c7f866216d8bd09bbd40ba",
+    "numImmatricul":"2342sdf",
+    "marque":"ford",
+    "modele":"toyota"
+}
+
+###
+GET {{baseUrl}}/voitures/all HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+PUT {{baseUrl}}/api/atelier/update/reparation HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "entreeId":"63ca5b300e940ba53906bab0",
+    "reparationId":"63ca81be08b1f4b4a1fa71cf"
+}
+
+###
+
+GET {{baseUrl}}/api/atelier/entree/info?id=63ca5be34e0f654ce07d4182 HTTP/1.1
 Authorization: Bearer {{token}}
