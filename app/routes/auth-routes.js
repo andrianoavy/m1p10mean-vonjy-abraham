@@ -11,7 +11,7 @@ const { User } = require('../models/user')
 const checkJwt = require('../middlewares/checkJwt')
 const checkRole = require('../middlewares/checkRole')
 
-const baseRoute = '/auth'
+const baseRoute = '/api/auth'
 
 let { AllUsers, Client, ClientAtelier, ClientFinancier, Atelier, Financier, Atelierfinancier } = require('../utils/role');
 
@@ -80,6 +80,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
             res.status(401).json({
                 message: 'Authentication failed',
             })
+            throw err;
         })
 })
 
