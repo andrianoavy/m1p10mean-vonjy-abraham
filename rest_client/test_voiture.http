@@ -37,5 +37,5 @@ Content-Type: application/json
     "montantPrestation":200000,
     "designationAchat":"Achat piston",
     "montantAchat":500000,
-    "dateDebut":"23/01/2023"
+    "dateDebut":"01-23-2023"
 }
