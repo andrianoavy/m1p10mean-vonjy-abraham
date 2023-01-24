@@ -44,37 +44,36 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
         .findOne({
             email: req.body.email,
         })
+        .catch((err) => {            
+            throw new Error(`Erreur lors de la recherche de l'email '${req.body.email}'`)
+        })
         .then((user) => {
             if (!user) {
-                return res.status(401).json({
-                    message: 'Authentification échouée',
-                })
+                throw new Error(`Pas de mail correspondant à '${req.body.email}'`)
             }
             getUser = user
             return bcrypt.compare(req.body.password, user.password)
         })
         .then((response) => {
             if (!response) {
-                return res.status(401).json({
-                    message: 'Authentification échouée',
-                })
+                throw new Error(`Erreur lors de la comparaison des MdP`)
             }
             let jwtToken = jwt.sign({
-                    name: getUser.name,
+                    name: getUser.nom,
                     userId: getUser._id,
                 },
                 process.env.JWT_TOKEN_SECRET, {
                     expiresIn: '1h',
                 },
             )
-            res.status(200).json({
+            return res.status(200).json({
                 token: jwtToken,
                 expiresIn: 3600,
                 _id: getUser._id,
             })
         })
         .catch((err) => {
-            return res.status(401).json({
+            res.status(401).json({
                 message: 'Authentication failed',
             })
         })
