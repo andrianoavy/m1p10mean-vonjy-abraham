@@ -12,7 +12,7 @@ const { connectDb } = require('./config/connection');
 const port = process.env.PORT || 3000;
 
 var corsOptions = {
-    origin: "http://127.0.0.1:8080"
+    origin: "http://localhost:4200"
 };
 
 app.use(cors(corsOptions));

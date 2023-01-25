@@ -34,7 +34,7 @@ module.exports = {
         }).toArray();
     },
     findOneWithEntree: async function (where) {
-        return collection.aggregate([
+        const voiture = await collection.aggregate([
             { $match: { ...where }, },
             {
                 $lookup:
@@ -43,14 +43,26 @@ module.exports = {
                     localField: "_id",
                     foreignField: "voitureId",
                     as: "entree",
-                    pipeline: [ {
+                    pipeline: [{
                         $match: {
-                           dateSortie:null,
-                        }
-                     } ],
+                            dateSortie: null,
+                        },
+                    },
+                    {
+                        $sort: {dateEntree:-1}
+                    },
+                    {
+                        $limit: 1
+                    }],
                 },
+            },
+            {
+                $set: {
+                    entree: { $arrayElemAt: ["$entree", 0] }
+                }
             },
             { $limit: 1 }
         ]).toArray();
+        return voiture;
     }
 }

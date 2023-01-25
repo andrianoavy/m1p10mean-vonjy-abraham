@@ -2,28 +2,29 @@ const recordRoutes = require('express').Router()
 
 const { ObjectId } = require('mongodb');
 const db = require('../db/voitures-db');
+const entreeDb = require('../db/voitures-db');
 
 const authorize = require('../middlewares/auth-middlewares');
+const checkJwt = require('../middlewares/checkJwt');
+const checkRole = require('../middlewares/checkRole');
+const ClientRole = require('../utils/role').Client
 const { Voiture } = require('../models/voiture');
 
 const baseRoute = '/api/voitures'
 
-recordRoutes.get(`${baseRoute}/client/:immatriculation`, authorize, function (req, res) {
+recordRoutes.get(`${baseRoute}/client/:immatriculation`, checkJwt,checkRole(ClientRole), function (req, res) {
 
     const immatriculation = req.params.immatriculation
-    const userId = req.payload.userId
-
+    const userId = req.jwtPayLoad.userId
     db.findOneWithEntree({_idUser:new ObjectId(userId), numImmatricul:immatriculation})
     .then((data)=>{
-        res.json(data).send();
+        if(Array.isArray(data))
+            res.json(data[0]);
     })
     .catch((err)=> {
         res.status(500).send("Erreur du server")
         throw err;
-    });
-
-
-    
+    });    
 });
 
 recordRoutes.get(`${baseRoute}`, authorize, function (req, res) {

@@ -60,5 +60,16 @@ module.exports = {
       },
       { $set: { "reparations.$.Etat": "Terminer" } }
     );
+  },
+
+  getLastOneByIdVoiture: async function(idVoiture, isDateSortieNull = true){
+    const where = {
+      idVoiture:new ObjectId(idVoiture),
+      $orderby:{dateEntree:-1}
+    };
+    if(isDateSortieNull){
+      where.dateSortie = null
+    } 
+    return collection.findOne(where)
   }
 };

@@ -21,10 +21,11 @@ const checkJwt =
             jwtPayLoad = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
             req.jwtPayLoad = jwt.decode(token);
         } catch (error) {
-            return res.status(401).send({
+            res.status(401).send({
                 status: "Error",
                 message: "no token"
             })
+            console.error(error)
         }
 
 

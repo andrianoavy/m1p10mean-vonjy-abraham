@@ -14,7 +14,7 @@ const checkRole = require("../middlewares/checkRole");
 
 const { ObjectId } = require("bson");
 
-const baseRoute = "/api";
+const baseRoute = "/api/entrees";
 
 let {
   AllUsers,
@@ -200,5 +200,27 @@ recordRoutes.get(
       });
   }
 );
+
+recordRoutes.get(
+  `${baseRoute}`,
+  checkJwt,
+  checkRole(Client),
+  function(req,res)
+{
+  if(!req.query.voiture){
+    res.status(400).send("Pas de voiture selectionnée")
+    throw new Error("Pas de voiture fournie")
+  }
+  const idVoiture = req.query.voiture
+  entreeDb.getLastOneByIdVoiture(idVoiture).then(data => {
+    res.json(data)
+  })
+  .catch((err) => {
+    res.status(500).json({
+      message: "Erreur serveur"
+    });
+    console.error(err)
+  })
+});
 
 module.exports = recordRoutes;
