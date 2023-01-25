@@ -49,7 +49,7 @@ module.exports = {
                         },
                     },
                     {
-                        $sort: {dateEntree:-1}
+                        $sort: { dateEntree: -1 }
                     },
                     {
                         $limit: 1
@@ -64,5 +64,37 @@ module.exports = {
             { $limit: 1 }
         ]).toArray();
         return voiture;
+    },
+    findVoitureWithHistorique: async function (where, page, itemCount) {
+        let skip = parseInt(page) - 1 || 0
+        let limit = parseInt(itemCount) || 10
+        const voiture = await collection.aggregate([
+            { $match: { ...where }, },
+            {
+                $lookup:
+                {
+                    from: "entrees",
+                    localField: "_id",
+                    foreignField: "voitureId",
+                    as: "entrees",
+                    pipeline: [
+                        {
+                            $sort: { dateEntree: -1 }
+                        },
+                        {
+                            $skip: skip
+                        },
+                        {
+                            $limit: limit
+                        },
+                    ],
+                },
+            },
+            { $limit: 1 }
+        ]).toArray();
+        if (Array.isArray(voiture) && voiture.length > 0) {
+            return { voiture: voiture[0], page: (skip + 1)}
+        }
+        return null;
     }
 }

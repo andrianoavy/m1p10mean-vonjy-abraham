@@ -47,7 +47,8 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
         .findOne({
             email: req.body.email,
         })
-        .catch((err) => {            
+        .catch((err) => {  
+            console.Error(err)          
             throw new Error(`Erreur lors de la recherche de l'email '${req.body.email}'`)
         })
         .then((user) => {

@@ -1,0 +1,14 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2M4MWFkOTY3NDEzMzRhZmM1YmQ4NmIiLCJpYXQiOjE2NzQ2NTQzNDAsImV4cCI6MTY3NDY1Nzk0MH0._tsPsyPT_1QbkbXOGnjozGUbixJZKIMQMM0Fs4-WeYY
+@baseUrl = http://localhost:3000/api
+
+###
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+{
+    "email":"abrahamramilison+andrianoavy@gmail.com",
+    "password":"123456"
+}
+
+###
+GET {{baseUrl}}/voitures/client/historique/0405%20TAC HTTP/1.1
+Authorization: Bearer {{token}}

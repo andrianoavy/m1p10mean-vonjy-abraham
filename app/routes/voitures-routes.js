@@ -26,6 +26,20 @@ recordRoutes.get(`${baseRoute}/client/:immatriculation`, checkJwt,checkRole(Clie
         throw err;
     });    
 });
+recordRoutes.get(`${baseRoute}/client/historique/:immatriculation`, checkJwt,checkRole(ClientRole), function (req, res) {
+
+    const immatriculation = req.params.immatriculation
+    const userId = req.jwtPayLoad.userId
+    db.findVoitureWithHistorique({_idUser:new ObjectId(userId), numImmatricul:immatriculation})
+    .then((data)=>{
+        if(data)
+            res.json(data);
+    })
+    .catch((err)=> {
+        res.status(500).send("Erreur du server")
+        throw err;
+    });    
+});
 
 recordRoutes.get(`${baseRoute}`, authorize, function (req, res) {
 
