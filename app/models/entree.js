@@ -1,11 +1,16 @@
 const { ObjectId } = require("bson");
 module.exports = {
   Entree: class {
-    constructor(designation, dateEntree, dateSortie, voitureId, reparations) {
+    constructor(designation, dateEntree, dateSortie, voitureId,bonDeSortie, reparations) {
       this.designation = designation;
       this.dateEntree = new Date(dateEntree);
-      if (dateSortie) this.dateSortie = new Date(dateSortie);
+      if (dateSortie){
+        this.dateSortie = new Date(dateSortie);
+      }else{
+        this.dateSortie = null;
+      }
       this.voitureId = new ObjectId(voitureId);
+      this.bonDeSortie = bonDeSortie;
       this.reparations = reparations;
     }
   },
@@ -27,6 +32,10 @@ module.exports = {
           },
           designation: {
             bsonType: "string",
+            description: "'designation' doit être une chaine de caractère"
+          },
+          bonDeSortie: {
+            enum: ["Non valide","Valide"],
             description: "'designation' doit être une chaine de caractère"
           },
           voitureId: {

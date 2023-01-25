@@ -60,5 +60,25 @@ module.exports = {
       },
       { $set: { "reparations.$.Etat": "Terminer" } }
     );
+  },
+
+  updateEntree:async function(entreeId){
+    return collection.updateOne(
+      {
+        _id: new ObjectId(entreeId),
+      },
+      {$set:{bonDeSortie : "Valide", dateSortie: new Date()}}
+    )
+  },
+
+  deleteReparation:async function(entreeId,reparationId){
+    return collection.updateMany(
+      {
+        _id: new ObjectId(entreeId)
+      },
+      {
+        $pull : { reparations:{   reparationId: ObjectId(reparationId) }}
+      }
+    )
   }
 };
