@@ -114,6 +114,77 @@ module.exports = {
         }
       }
     ]).toArray()
+  },
+
+  chiffreAffaireParMois:async function(){
+    return  collection.aggregate([
+      {
+        $unwind: "$reparations"
+      },
+      {
+        "$match": {
+          "dateEntree": {
+            "$gte": ISODate("2023-01-01"),
+            "$lt": ISODate("2024-01-01")
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            $month: "$dateEntree"
+          },
+          totalPrestation: {
+            $sum: "$reparations.montantPrestation"
+          },
+          totalAchat: {
+            $sum: "$reparations.montantAchat"
+          }
+        }
+      },
+      {
+        $sort: {
+          _id: 1
+        }
+      }
+    ])
+  },
+
+  chiffreAffaireParJour: async function(){
+    return collection.aggregate([
+      {
+        $unwind: "$reparations"
+      },
+      {
+        "$match": {
+          "dateEntree": {
+            "$gte": ISODate("2023-01-01"),
+            "$lt": ISODate("2024-01-01")
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              format: "%Y-%m-%d",
+              date: "$dateEntree"
+            }
+          },
+          totalPrestation: {
+            $sum: "$reparations.montantPrestation"
+          },
+          totalAchat: {
+            $sum: "$reparations.montantAchat"
+          }
+        }
+      },
+      {
+        $sort: {
+          _id: 1
+        }
+      }
+    ])
   }
 
 };
