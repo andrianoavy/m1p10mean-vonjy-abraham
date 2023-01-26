@@ -225,7 +225,7 @@ recordRoutes.put(
             emailService.sendMail(data.email, {
               subject: "Bon de sortie par Mikara-Car",
               text: "test2",
-              html: "<span>Bonjour, <br><br></span><span>Les reparations sur votre voiture sont terminees. Nous venons de valider votre bon de sortie du garage. Veillez prendre votre voiture chez nous.</span><br><br>Cordialement."
+              html: "<span>Bonjour "+data.name +", <br><br></span><span>Les réparations sur votre voiture sont terminées. Nous venons de valider votre bon de sortie du garage. Veillez prendre votre voiture chez nous.</span><br><br>Merci beaucoup."
             });
           });
         });
@@ -268,5 +268,55 @@ recordRoutes.delete(
       });
   }
 );
+
+recordRoutes.get(
+  "/api/atelier/searchEntree",
+  checkJwt,
+  checkRole(Atelier),
+  (req, res) => {
+    entreeDb
+      .filterEntreeWithCar(req.query.search)
+      .then((entree) => {
+        if (!entree) {
+          return res.status(401).json({
+            message: "Pas de resultat"
+          });
+        }
+        res.status(200).json({
+          status: "Success",
+          data: entree
+        });
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  }
+);
+
+recordRoutes.get(
+  "/api/entree/tempsMoyenReparation",
+  checkJwt,
+  checkRole(Atelier),
+  (req, res) => {
+    entreeDb.tempDeReparationMoyen().then((result)=>{
+      if (!result) {
+        return res.status(401).json({
+          message: "Pas de resultat"
+        });
+      }
+      let tempMoyen = 0;
+      for(const data of result)
+      {
+        tempMoyen = tempMoyen + data.dateDiffReparation;
+      }
+      res.status(200).json({
+        status: "Success",
+        data: tempMoyen/result.length
+      });
+    }).catch((err) => {
+      throw new Error(err);
+    });
+  }
+)
 
 module.exports = recordRoutes;

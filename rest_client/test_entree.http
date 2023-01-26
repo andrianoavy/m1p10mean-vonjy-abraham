@@ -1,7 +1,6 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2NmYTBjOTAxMTdjM2RiYTZkM2I0MjMiLCJpYXQiOjE2NzQ2NzMwMDEsImV4cCI6MTY3NDY3NjYwMX0.VPg4UaXJasO7xjzRjtLQkbfTKa6ILx76ydU_Lo6xLOg
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2NmYTBjOTAxMTdjM2RiYTZkM2I0MjMiLCJpYXQiOjE2NzQ3NDkxOTAsImV4cCI6MTY3NDc1Mjc5MH0.vw4ktXYIo9M1pZxBh5X2-BpGM7nynlQaucEaW94t0CM
 ###
 POST {{baseUrl}}/api/auth/inscription HTTP/1.1
 Content-Type: application/json
@@ -17,7 +16,7 @@ POST {{baseUrl}}/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"vonjitahinaranjelison@gmail.com",
+    "email":"jean@gmail.com",
     "password":"123456"
 }
 
@@ -113,3 +112,12 @@ Content-Type: application/json
     "entreeId":"63ca5b300e940ba53906bab0",
     "reparationId":"63cb8e4827fc86d88213b35a"
 }
+
+
+###
+GET {{baseUrl}}/api/atelier/searchEntree?search=2342sdf HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/entree/tempsMoyenReparation HTTP/1.1
+Authorization: Bearer {{token}}

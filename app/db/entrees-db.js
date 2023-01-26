@@ -80,5 +80,40 @@ module.exports = {
         $pull : { reparations:{   reparationId: ObjectId(reparationId) }}
       }
     )
+  },
+
+  filterEntreeWithCar: async function (search) {
+    return
+  },
+
+  tempDeReparationMoyen: async function(){
+    return collection.aggregate([
+      {
+        $unwind: "$reparations"
+      },
+      {
+        $project: {
+          _id: 0,
+          dateDiffReparation: {
+            "$dateDiff": {
+              "startDate": {
+                $convert: {
+                  input: "$reparations.dateDebut",
+                  to: "date"
+                }
+              },
+              "endDate": {
+                $convert: {
+                  input: "$reparations.dateFin",
+                  to: "date"
+                }
+              },
+              "unit": "hour"
+            }
+          }
+        }
+      }
+    ]).toArray()
   }
+
 };
