@@ -30,7 +30,10 @@ recordRoutes.get(`${baseRoute}/client/historique/:immatriculation`, checkJwt,che
 
     const immatriculation = req.params.immatriculation
     const userId = req.jwtPayLoad.userId
-    db.findVoitureWithHistorique({_idUser:new ObjectId(userId), numImmatricul:immatriculation})
+    let page = req.query["page"] || 0;
+    let itemCount = req.query["itemCount"] || 10;
+    
+    db.findVoitureWithHistorique({_idUser:new ObjectId(userId), numImmatricul:immatriculation},page,itemCount)
     .then((data)=>{
         if(data)
             res.json(data);

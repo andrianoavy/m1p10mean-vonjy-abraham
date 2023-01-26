@@ -66,8 +66,10 @@ module.exports = {
         return voiture;
     },
     findVoitureWithHistorique: async function (where, page, itemCount) {
-        let skip = parseInt(page) - 1 || 0
+        let skip = parseInt(page)|| 0
         let limit = parseInt(itemCount) || 10
+        if(skip<0) skip = 0
+        if(limit<=0) skip = 10 
         const voiture = await collection.aggregate([
             { $match: { ...where }, },
             {
@@ -93,7 +95,9 @@ module.exports = {
             { $limit: 1 }
         ]).toArray();
         if (Array.isArray(voiture) && voiture.length > 0) {
-            return { voiture: voiture[0], page: (skip + 1)}
+            const countWhere = {voitureId:voiture[0]._id}
+            const count = await dbo.collection('entrees').countDocuments(countWhere)
+            return { voiture: voiture[0], page: (skip), total:count }
         }
         return null;
     }
