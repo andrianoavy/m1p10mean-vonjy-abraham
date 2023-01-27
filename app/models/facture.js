@@ -1,13 +1,26 @@
 const {ObjectId,Double} = require('mongodb')
 module.exports = {
     Facture: class {
-        constructor(idUser, idEntree,motif,dateFacture,remise) {
+        constructor(idUser, idEntree,resumeUser, resumeVoiture, debutReparation, finReparation, motif,dateFacture,remise) {
             this.idUser = new ObjectId(idUser);
             this.idEntree = new ObjectId(idEntree);
+            this.resumeUser = resumeUser
+            this.resumeVoiture = resumeVoiture
+            this.debutReparation = new Date(debutReparation)
+            this.finReparation = new Date(finReparation)
             this.motif = motif
             this.dateFacture = new Date(dateFacture);
             this.remise = new Double(remise)
             this.details = [];
+            this.paid = false;
+            this.totalHT = 0;
+            this.totalTTC = 0;
+        }
+        getTotalHT(){
+            this.totalHT = this.details.reduce((prev, curr) => prev + curr.montant.value, 0)
+        }
+        getTotalTTC(){
+            this.totalTTC = this.totalHT * (1 + parseFloat(process.env.TVA))
         }
     },
     FactureDetail: class {
@@ -45,6 +58,10 @@ module.exports = {
                         description:"'remise' doit être un double",
                         minimum:0,
                     },
+                    paid: {
+                        bsonType:"bool",
+                        description:"'paid' doit être un boolean",
+                    },
                     details: {
                         bsonType: "array",
                         items: {
@@ -73,7 +90,7 @@ module.exports = {
         }
     },
     indexes:[
-        {indexInfo:{ "idUser": 1, },isUnique:true},
-        {indexInfo:{ "idEntree": 1, },isUnique:true},
+        {indexInfo:{ "idUser": 1, }},
+        {indexInfo:{ "idEntree": 1, }},
     ],
 }

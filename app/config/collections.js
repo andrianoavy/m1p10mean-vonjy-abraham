@@ -4,7 +4,8 @@ const { Db, Collection } = require("mongodb")
 const collections = [
     require('../models/user'),
     require('../models/voiture'),
-    require('../models/entree')
+    require('../models/entree'),
+    require('../models/facture')
 ]
 
 module.exports = {

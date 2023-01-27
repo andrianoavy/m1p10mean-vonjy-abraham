@@ -1,0 +1,23 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2M5NDFhYzQ4ZDVhYzY5NzE4ZDU3ODYiLCJpYXQiOjE2NzQ4MjAxOTQsImV4cCI6MTY3NDgyMzc5NH0.xiOMtHMT0LVTBAVdO66-fD-9hQx58zFgEaos2mZH-RA
+@baseUrl = http://localhost:3000/api
+
+###
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"abrahamramilison+andrianoavy@gmail.com",
+    "password":"123456"
+}
+###
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"test@test.com",
+    "password":"123456"
+}
+
+###
+GET {{baseUrl}}/factures HTTP/1.1
+Authorization: Bearer {{token}}

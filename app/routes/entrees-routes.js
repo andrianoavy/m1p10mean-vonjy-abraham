@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 
 const emailService = require("../services/email.service");
+const factureService = require("../services/facture.service");
 
 const recordRoutes = require("express").Router();
 
@@ -241,8 +242,13 @@ recordRoutes.put(
           });
         }
 
-        entreeDb.getOneById(req.body.entreeId).then((result) => {
+        entreeDb.getOneById(req.body.entreeId).then((result) => {          
+
           userDb.findOneById(result[0].voiture[0]._idUser).then((data) => {
+          
+          //générer facture
+          factureService.generateFacture(result[0],data);
+
             emailService.sendMail(data.email, {
               subject: "Bon de sortie par Mikara-Car",
               text: "test2",

@@ -47,11 +47,7 @@ module.exports = {
                     localField: "_id",
                     foreignField: "voitureId",
                     as: "entree",
-                    pipeline: [{
-                        $match: {
-                            dateSortie: null,
-                        },
-                    },
+                    pipeline: [
                     {
                         $sort: { dateEntree: -1 }
                     },
@@ -121,6 +117,7 @@ module.exports = {
     findVoitureWithHistorique: async function (where, page, itemCount) {
         let skip = parseInt(page) || 0
         let limit = parseInt(itemCount) || 10
+        skip = limit * skip
         if (skip < 0) skip = 0
         if (limit <= 0) skip = 10
         const voiture = await collection.aggregate([
