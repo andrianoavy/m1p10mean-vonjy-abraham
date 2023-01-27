@@ -317,7 +317,7 @@ recordRoutes.get(
 recordRoutes.get(
   "/api/entree/tempsMoyenReparation",
   checkJwt,
-  checkRole(Atelier),
+  checkRole(Financier),
   (req, res) => {
     entreeDb.tempDeReparationMoyen().then((result)=>{
       if (!result) {
@@ -338,6 +338,48 @@ recordRoutes.get(
       throw new Error(err);
     });
   }
-)
+);
+
+recordRoutes.get(
+  "/api/entree/chiffreAffaire/mois",
+  checkJwt,
+  checkRole(Financier),
+  (req, res) => {
+    entreeDb.chiffreAffaireParMois().then((result)=>{
+      if (!result) {
+        return res.status(401).json({
+          message: "Pas de resultat"
+        });
+      }
+      res.status(200).json({
+        status: "Success",
+        data: result
+      });
+    }).catch((err) => {
+      throw new Error(err);
+    });
+  }
+);
+
+recordRoutes.get(
+  "/api/entree/chiffreAffaire/jours",
+  checkJwt,
+  checkRole(Financier),
+  (req, res) => {
+    entreeDb.chiffreAffaireParJour(req.query.mois).then((result)=>{
+      if (!result) {
+        return res.status(401).json({
+          message: "Pas de resultat"
+        });
+      }
+      res.status(200).json({
+        status: "Success",
+        data: result
+      });
+    }).catch((err) => {
+      throw new Error(err);
+    });
+  }
+);
 
 module.exports = recordRoutes;

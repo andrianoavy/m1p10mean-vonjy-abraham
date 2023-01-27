@@ -135,7 +135,7 @@ module.exports = {
                   to: "date"
                 }
               },
-              "unit": "hour"
+              "unit": "day"
             }
           }
         }
@@ -144,6 +144,9 @@ module.exports = {
   },
 
   chiffreAffaireParMois: async function () {
+    const annee = new Date().getFullYear();
+    debut = annee+"-01-01";
+    fin = (annee+1)+"-01-01";
     return collection.aggregate([
       {
         $unwind: "$reparations"
@@ -151,15 +154,15 @@ module.exports = {
       {
         "$match": {
           "dateEntree": {
-            "$gte": ISODate("2023-01-01"),
-            "$lt": ISODate("2024-01-01")
+            "$gte": new Date(debut),
+            "$lt": new Date(fin)
           }
         }
       },
       {
         $group: {
           _id: {
-            $month: "$dateEntree"
+            $month: "$reparations.dateDebut"
           },
           totalPrestation: {
             $sum: "$reparations.montantPrestation"
@@ -174,29 +177,30 @@ module.exports = {
           _id: 1
         }
       }
-    ])
+    ]).toArray()
   },
 
-  chiffreAffaireParJour: async function () {
+  chiffreAffaireParJour: async function (mois) {
+    const annee = new Date().getFullYear();
+    debut = annee+"-"+mois+"-"+"01";
+    mois = parseInt(mois)+1;
+    fin = annee+"-"+(mois)+"-"+"01";
     return collection.aggregate([
       {
         $unwind: "$reparations"
       },
       {
         "$match": {
-          "dateEntree": {
-            "$gte": ISODate("2023-01-01"),
-            "$lt": ISODate("2024-01-01")
+          "reparations.dateDebut": {
+            "$gte": new Date(debut),
+            "$lt": new Date(fin)
           }
         }
       },
       {
         $group: {
           _id: {
-            $dateToString: {
-              format: "%Y-%m-%d",
-              date: "$dateEntree"
-            }
+            "$dayOfMonth": "$reparations.dateDebut"
           },
           totalPrestation: {
             $sum: "$reparations.montantPrestation"
@@ -211,7 +215,7 @@ module.exports = {
           _id: 1
         }
       }
-    ])
+    ]).toArray()
   }
 
 };
