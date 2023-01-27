@@ -12,6 +12,14 @@ const { Voiture } = require('../models/voiture');
 
 const baseRoute = '/api/voitures'
 
+// recordRoutes.get(`${baseRoute}/test`,function(req,res){
+//     db.findAllWithLastEntree({}).then(
+//         data => {
+//             res.json(data) 
+//         }
+//     )
+// })
+
 recordRoutes.get(`${baseRoute}/client/:immatriculation`, checkJwt,checkRole(ClientRole), function (req, res) {
 
     const immatriculation = req.params.immatriculation
@@ -26,6 +34,7 @@ recordRoutes.get(`${baseRoute}/client/:immatriculation`, checkJwt,checkRole(Clie
         throw err;
     });    
 });
+
 recordRoutes.get(`${baseRoute}/client/historique/:immatriculation`, checkJwt,checkRole(ClientRole), function (req, res) {
 
     const immatriculation = req.params.immatriculation
@@ -49,7 +58,7 @@ recordRoutes.get(`${baseRoute}`, authorize, function (req, res) {
     const idUser = req.payload.userId
 
     if (req.query.search) {
-        db.findAllSearchByClient(idUser, req.query.search.trim())
+        db.searchByClientWithLE(idUser, req.query.search.trim())
             .then((result) => {
                 return res.json(result);
             })
@@ -60,7 +69,7 @@ recordRoutes.get(`${baseRoute}`, authorize, function (req, res) {
         return;
     }
 
-    db.findAllByClient(idUser)
+    db.findAllWithLastEntree(idUser)
         .then((result) => res.json(result))
         .catch((err) => {
             console.log(err);

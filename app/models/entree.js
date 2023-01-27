@@ -10,6 +10,7 @@ module.exports = {
     }
   },
   collectionName: "entrees",
+  indexes:[{indexInfo:{ "voitureId": 1 }}],
   options: {
     validator: {
       $jsonSchema: {

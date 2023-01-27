@@ -62,14 +62,31 @@ module.exports = {
     );
   },
 
-  getLastOneByIdVoiture: async function(idVoiture, isDateSortieNull = true){
+  getLastOneByIdVoiture: async function (idVoiture, isDateSortieNull = true) {
     const where = {
-      idVoiture:new ObjectId(idVoiture),
-      $orderby:{dateEntree:-1}
+      idVoiture: new ObjectId(idVoiture),
+      $orderby: { dateEntree: -1 }
     };
-    if(isDateSortieNull){
+    if (isDateSortieNull) {
       where.dateSortie = null
-    } 
+    }
     return collection.findOne(where)
+  },
+
+  getEtatVoiture: async function (voitureId) {
+    const lastEntree = await collection
+      .find({
+        'voitureId': new ObjectId(voitureId),
+      })
+      .sort({ dateEntree: -1 })
+      .limit(1).toArray();
+    const etat = "Chez le client"
+    if(!Array.isArray(lastEntree) || !lastEntree[0]){
+      return etat
+    }
+    if(lastEntree[0].dateEntree){
+      return "Réparée"
+    }
+    return "En réparation"
   }
 };

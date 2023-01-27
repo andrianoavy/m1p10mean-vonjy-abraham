@@ -1,4 +1,4 @@
-@baseUrl = http://127.0.0.1:3000/voitures
+@baseUrl = http://127.0.0.1:3000/api/voitures
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWJyYWhhbSIsInVzZXJJZCI6IjYzYzA4ZDAzNGU2Yjg4OGExMTEzNGNiNSIsImlhdCI6MTY3Mzg3NDkzMSwiZXhwIjoxNjczODc4NTMxfQ.G67QuEmfsxXpwGEnO4zdHQv6WXrKe9PA-gHFfILI82g
 
 ###
@@ -18,3 +18,6 @@ Content-Type: application/json
     "marque":"Peugeot",
     "modele":"406"
 }
+
+###
+GET {{baseUrl}}/test HTTP/1.1
