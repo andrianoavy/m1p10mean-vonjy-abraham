@@ -62,22 +62,49 @@ module.exports = {
     );
   },
 
-  updateEntree:async function(entreeId){
+  getLastOneByIdVoiture: async function (idVoiture, isDateSortieNull = true) {
+    const where = {
+      idVoiture: new ObjectId(idVoiture),
+      $orderby: { dateEntree: -1 }
+    };
+    if (isDateSortieNull) {
+      where.dateSortie = null
+    }
+    return collection.findOne(where)
+  },
+
+  getEtatVoiture: async function (voitureId) {
+    const lastEntree = await collection
+      .find({
+        'voitureId': new ObjectId(voitureId),
+      })
+      .sort({ dateEntree: -1 })
+      .limit(1).toArray();
+    const etat = "Chez le client"
+    if (!Array.isArray(lastEntree) || !lastEntree[0]) {
+      return etat
+    }
+    if (lastEntree[0].dateEntree) {
+      return "Réparée"
+    }
+    return "En réparation"
+  },
+  updateEntree: async function (entreeId) {
     return collection.updateOne(
       {
         _id: new ObjectId(entreeId),
       },
-      {$set:{bonDeSortie : "Valide", dateSortie: new Date()}}
+      { $set: { bonDeSortie: "Valide", dateSortie: new Date() } }
     )
   },
 
-  deleteReparation:async function(entreeId,reparationId){
+  deleteReparation: async function (entreeId, reparationId) {
     return collection.updateMany(
       {
         _id: new ObjectId(entreeId)
       },
       {
-        $pull : { reparations:{   reparationId: ObjectId(reparationId) }}
+        $pull: { reparations: { reparationId: ObjectId(reparationId) } }
       }
     )
   },
@@ -86,7 +113,7 @@ module.exports = {
     return
   },
 
-  tempDeReparationMoyen: async function(){
+  tempDeReparationMoyen: async function () {
     return collection.aggregate([
       {
         $unwind: "$reparations"
@@ -116,8 +143,8 @@ module.exports = {
     ]).toArray()
   },
 
-  chiffreAffaireParMois:async function(){
-    return  collection.aggregate([
+  chiffreAffaireParMois: async function () {
+    return collection.aggregate([
       {
         $unwind: "$reparations"
       },
@@ -150,7 +177,7 @@ module.exports = {
     ])
   },
 
-  chiffreAffaireParJour: async function(){
+  chiffreAffaireParJour: async function () {
     return collection.aggregate([
       {
         $unwind: "$reparations"
