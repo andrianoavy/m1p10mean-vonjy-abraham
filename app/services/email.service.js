@@ -34,8 +34,6 @@ module.exports = {
             subject: mail.subject, // Subject line
             text: mail.text, // plain text body
             html: mail.html, // html body
-          }).then(res => {
-            console.log({res});
-          }).catch(console.error);
+          }).then(res => {}).catch(console.error);
     }
 }

@@ -1,19 +1,18 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmVhbiIsInVzZXJJZCI6IjYzYzgyYWFhMzJmZjg1NmQwNzYzMjcyYyIsImlhdCI6MTY3NDQ3OTg0OCwiZXhwIjoxNjc0NDgzNDQ4fQ.ZSldRaA8TDG21Tp0Q8-BQUSERrpUVPyrs82A3JldLNA
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2NmYTBjOTAxMTdjM2RiYTZkM2I0MjMiLCJpYXQiOjE2NzQ3NDkxOTAsImV4cCI6MTY3NDc1Mjc5MH0.vw4ktXYIo9M1pZxBh5X2-BpGM7nynlQaucEaW94t0CM
 ###
-POST {{baseUrl}}/auth/inscription HTTP/1.1
+POST {{baseUrl}}/api/auth/inscription HTTP/1.1
 Content-Type: application/json
 
 {
-    "name":"Jean",
-    "email":"jean@gmail.com",
+    "name":"Vonjy",
+    "email":"vonjitahinaranjelison@gmail.com",
     "password":"123456",
-    "role":"Atelier"
+    "role":"Client"
 }
 ###
-POST {{baseUrl}}/auth/login HTTP/1.1
+POST {{baseUrl}}/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -28,8 +27,8 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "designation":"Entree raparation pont",
-    "dateEntree":"12/01/2023",
+    "designation":"Entree raparation porte",
+    "dateEntree":"25/01/2023",
     "voitureId":"63ca5a1c0e940ba53906baad"
 }
 
@@ -48,11 +47,11 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-    "entreeId":"63ca5b300e940ba53906bab0",
-    "description":"reparation pneu",
+    "entreeId":"63ca613e5fa36c8d978f0c10",
+    "description":"reparation jiro",
     "designationPrestation":"Main d'ouevre",
     "montantPrestation":200000,
-    "designationAchat":"Achat piston",
+    "designationAchat":"Achat pieces",
     "montantAchat":500000,
     "dateDebut":"23/01/2023",
     "dateFin":"26/01/2023"
@@ -93,4 +92,32 @@ Content-Type: application/json
 ###
 
 GET {{baseUrl}}/api/atelier/entree/info?id=63ca5be34e0f654ce07d4182 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+PUT {{baseUrl}}/api/atelier/entree HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "entreeId":"63ca5be34e0f654ce07d4182"
+}
+
+###
+DELETE {{baseUrl}}/api/atelier/reparation HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "entreeId":"63ca5b300e940ba53906bab0",
+    "reparationId":"63cb8e4827fc86d88213b35a"
+}
+
+
+###
+GET {{baseUrl}}/api/atelier/searchEntree?search=2342sdf HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/entree/tempsMoyenReparation HTTP/1.1
 Authorization: Bearer {{token}}
