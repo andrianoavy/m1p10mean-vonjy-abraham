@@ -242,7 +242,7 @@ recordRoutes.put(
         }
 
         entreeDb.getOneById(req.body.entreeId).then((result) => {
-          userDb.findOneById(result[0].voiture[0].idClient).then((data) => {
+          userDb.findOneById(result[0].voiture[0]._idUser).then((data) => {
             emailService.sendMail(data.email, {
               subject: "Bon de sortie par Mikara-Car",
               text: "test2",

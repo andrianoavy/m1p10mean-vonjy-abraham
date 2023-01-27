@@ -28,7 +28,7 @@ module.exports = {
             description: "'date d'entree' doit être une date"
           },
           dateSortie: {
-            bsonType: "date",
+            bsonType: ["date","null"],
             description: "'date de sortie' doit être une date"
           },
           designation: {
@@ -48,7 +48,7 @@ module.exports = {
             items: {
               bsonType: "object",
               required: [
-                "repatationId",
+                "reparationId",
                 "designationPrestation",
                 "montantPrestation",
                 "designationAchat",
