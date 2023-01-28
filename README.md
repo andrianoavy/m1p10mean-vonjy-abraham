@@ -43,15 +43,35 @@ Cliquer sur `Détails` dans l'écran `liste facture` pour montrer la facture en 
 
 ![](/assets/details-facture.png)
 
+![](/assets/details-facture.gif)
+
 ### Atelier
 
 #### Lister voiture
 
+![](/assets/liste-entrees.png)
+
 #### Drag and drop
+
+![](/assets/drag-drop-reparation.gif)
 
 #### Validation bon de sortie
 
+![](/assets/valide-entree.gif)
+
 ### Financier
+
+#### Tableau de bord
+
+![](/assets/chiffre-affaire-stat.png)
+
+#### Calcul bénéfice par mois
+
+![](/assets/benefice.gif)
+
+#### Valider paiements
+
+![](/assets/valider-paiement.gif)
 
 ## Technos
 
