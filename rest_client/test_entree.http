@@ -1,22 +1,23 @@
 @baseUrl = http://localhost:3000
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2NmYTBjOTAxMTdjM2RiYTZkM2I0MjMiLCJpYXQiOjE2NzQ3NDkxOTAsImV4cCI6MTY3NDc1Mjc5MH0.vw4ktXYIo9M1pZxBh5X2-BpGM7nynlQaucEaW94t0CM
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2QzYTAzOGIxODYzOTY1MDEzZjMyZDUiLCJpYXQiOjE2NzQ4NjExODIsImV4cCI6MTY3NDg2NDc4Mn0.efDaknFCk6bU-vqX9uAagPokX2pnSpUiF4PpWPaV25Y
+
 ###
 POST {{baseUrl}}/api/auth/inscription HTTP/1.1
 Content-Type: application/json
 
 {
-    "name":"Vonjy",
-    "email":"vonjitahinaranjelison@gmail.com",
+    "name":"Finacier",
+    "email":"financier@gmail.com",
     "password":"123456",
-    "role":"Client"
+    "role":"Finance"
 }
 ###
 POST {{baseUrl}}/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email":"jean@gmail.com",
+    "email":"financier@gmail.com",
     "password":"123456"
 }
 
@@ -120,4 +121,12 @@ Authorization: Bearer {{token}}
 
 ###
 GET {{baseUrl}}/api/entree/tempsMoyenReparation HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/entree/chiffreAffaire/mois HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/entree/chiffreAffaire/jours?mois=1 HTTP/1.1
 Authorization: Bearer {{token}}

@@ -34,7 +34,7 @@ recordRoutes.route(`${baseRoute}/inscription`).post(async function(req, res) {
             .then((result) => res.json(result))
             .catch((err) => {
                 console.log('Erreur ' + err);
-                console.log('Erreur Info ' + err.errInfo);
+                console.log( err.errInfo);
                 return res.status(400).send("Erreur lors de l'insertion de l'utilisateur!")
             })
     })
