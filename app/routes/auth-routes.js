@@ -81,7 +81,7 @@ recordRoutes.route(`${baseRoute}/login`).post((req, res) => {
             res.status(401).json({
                 message: 'Authentication failed',
             })
-            throw err;
+            console.error(err);
         })
 })
 

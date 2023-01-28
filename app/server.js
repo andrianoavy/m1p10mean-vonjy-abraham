@@ -36,6 +36,7 @@ connectDb(() => {
     app.use(require('./routes/auth-routes'))
     app.use(require('./routes/voitures-routes'))
     app.use(require('./routes/factures-routes'))
+    app.use(require('./routes/paiement-routes'))
 
     app.listen(port, () => {
         console.log(`🏃Server is running on port ${port}...🏃`)

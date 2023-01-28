@@ -1,8 +1,9 @@
 const factureDb = require('../db/factures-db')
 const { Facture, FactureDetail } = require('../models/facture')
+const TYPE_DEVIS = require('../utils/type-devis')
 
 function getUserResume(user){
-    return `"${user.name}" <${user.email}>`
+    return `${user.name} <${user.email}>`
 }
 
 function getVoitureResume(voiture){
@@ -10,14 +11,17 @@ function getVoitureResume(voiture){
 }
 
 function reparationToDetailsFacture(reparation){
-    const details = []
+    const details = {
+        achat:[],
+        prestation:[]
+    }
     if(reparation.montantPrestation > 0)
-        details.push(new FactureDetail(
-            `${reparation.description} - ${reparation.designationPrestation}`,reparation.montantPrestation
+        details.achat.push(new FactureDetail(
+            `${reparation.description} - ${reparation.designationPrestation}`,reparation.montantPrestation,TYPE_DEVIS.Prestation
         ))
     if(reparation.montantAchat > 0)
-        details.push(new FactureDetail(
-            `${reparation.description} - ${reparation.designationAchat}`,reparation.montantAchat
+        details.prestation.push(new FactureDetail(
+            `${reparation.description} - ${reparation.designationAchat}`,reparation.montantAchat,TYPE_DEVIS.Achat
         ))
     return details
 }
@@ -37,7 +41,9 @@ module.exports = {
         )
         if(Array.isArray(entree.reparations)){
             entree.reparations.forEach(reparation => {
-                facture.details.push(...reparationToDetailsFacture(reparation))
+                const details = reparationToDetailsFacture(reparation)
+                facture.details.achat.push(...details.achat)
+                facture.details.prestation.push(...details.prestation)
             });
         }
         facture.getTotalHT()

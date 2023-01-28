@@ -7,6 +7,9 @@ module.exports = {
     saveOne: async function (entree) {
         return collection.insertOne(entree);
     },
+    findOne: async function(where){
+        return collection.findOne(where)
+    },
     findAllFactures: async function (userId, options) {
         const idUser = new ObjectId(userId)
 
@@ -22,17 +25,18 @@ module.exports = {
         where.idUser = idUser
         if(options.search)
             where.$or= [
-                { "resumeVoiture": { $regex: `.*${search}.*`, $options: 'i' } },
-                { "motif": { $regex: `.*${search}.*`, $options: 'i' } },
+                { "resumeVoiture": { $regex: `.*${options.search}.*`, $options: 'i' } },
+                { "motif": { $regex: `.*${options.search}.*`, $options: 'i' } },
             ]
-        if(!options.showPaid){
-            where.paid=false
+        if(options.showPaid){
+                delete where.paid
         }
 
         const factures = await collection.aggregate([
             { $match: where , },
+            { $project : { details :0 } },
             {
-                $sort: { dateFacture: -1 }
+                $sort: { dateFacture: -1, paid:-1 }
             },
             {
                 $skip: skip
@@ -53,4 +57,7 @@ module.exports = {
         }
         return {factures:[],page:skip, total:0};
     },
+    updateOne:async function(idFacture, set){
+        return collection.updateOne({_id:new ObjectId(idFacture)},set)
+    }
 }

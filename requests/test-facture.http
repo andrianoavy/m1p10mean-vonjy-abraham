@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2M5NDFhYzQ4ZDVhYzY5NzE4ZDU3ODYiLCJpYXQiOjE2NzQ4MjAxOTQsImV4cCI6MTY3NDgyMzc5NH0.xiOMtHMT0LVTBAVdO66-fD-9hQx58zFgEaos2mZH-RA
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2M4MWFkOTY3NDEzMzRhZmM1YmQ4NmIiLCJpYXQiOjE2NzQ4MjIzNTgsImV4cCI6MTY3NDgyNTk1OH0.ZRB8vNC6LlOZPJNJzli-PVAGSc9KdkswM3_Ac3Xzc3k
 @baseUrl = http://localhost:3000/api
 
 ###
@@ -21,3 +21,11 @@ Content-Type: application/json
 ###
 GET {{baseUrl}}/factures HTTP/1.1
 Authorization: Bearer {{token}}
+
+###
+GET http://localhost:3000/api/factures?page=0&itemCount=10&search=&showPaid=false HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:3000/api/paiement?page=0&itemCount=10&search=&showValid=false HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Q0Y2RjYTNiNmMxOTNjMDFjNWYwZTEiLCJpYXQiOjE2NzQ4OTA3NDMsImV4cCI6MTY3NDg5NDM0M30.U0tDaGibO5bhJXoC7qyYGa55oMolYE9wWGs2tdy-LtE

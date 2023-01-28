@@ -1,7 +1,7 @@
 let AllUsers = [
     'Client',
     'Atelier',
-    'Financier'
+    'Finance'
 ]
 
 let Client = [
@@ -13,16 +13,16 @@ let Atelier = [
 ]
 
 let Financier = [
-    'Financier',
+    'Finance',
 ]
 
 let ClientFinancier = [
-    "Financier",
+    "Finance",
     "Client"
 ]
 
 let AtelierFinancier = [
-    "Financier",
+    "Finance",
     "Atelier"
 ]
 

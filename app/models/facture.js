@@ -1,4 +1,6 @@
 const {ObjectId,Double} = require('mongodb')
+
+
 module.exports = {
     Facture: class {
         constructor(idUser, idEntree,resumeUser, resumeVoiture, debutReparation, finReparation, motif,dateFacture,remise) {
@@ -11,22 +13,26 @@ module.exports = {
             this.motif = motif
             this.dateFacture = new Date(dateFacture);
             this.remise = new Double(remise)
-            this.details = [];
+            this.details = {achat:[],prestation:[]};
             this.paid = false;
-            this.totalHT = 0;
-            this.totalTTC = 0;
+            this.totalHT = {achat:0, prestation:0, total:0};
+            this.totalTTC = {taux:Number.parseFloat(process.env.TVA),montantTaxe:0, montant:0};
         }
         getTotalHT(){
-            this.totalHT = this.details.reduce((prev, curr) => prev + curr.montant.value, 0)
+            this.totalHT.achat = this.details.achat.reduce((prev, curr) => prev + curr.montant.value, 0)
+            this.totalHT.prestation = this.details.prestation.reduce((prev, curr) => prev + curr.montant.value, 0)
+            this.totalHT.total = this.totalHT.achat + this.totalHT.prestation
         }
         getTotalTTC(){
-            this.totalTTC = this.totalHT * (1 + parseFloat(process.env.TVA))
+            this.totalTTC.montantTaxe = this.totalHT.total * this.totalTTC.taux
+            this.totalTTC.montant = this.totalHT.total + this.totalTTC.montantTaxe
         }
     },
     FactureDetail: class {
-        constructor(desc,montant){
+        constructor(desc,montant, typeDevis){
             this.description = desc
             this.montant = new Double(montant)
+            this.typeDevis = typeDevis 
         }
     },
     collectionName:"factures",
@@ -62,13 +68,14 @@ module.exports = {
                         bsonType:"bool",
                         description:"'paid' doit être un boolean",
                     },
-                    details: {
+                    "details.prestation": {
                         bsonType: "array",
                         items: {
                             bsonType: "object",
                             required: [
                               "description",
                               "montant",
+                              "typeDevis"
                             ],
                             additionalProperties: false,
                             description: "'items' must contain the stated fields.",
@@ -81,6 +88,38 @@ module.exports = {
                                     bsonType:"double",
                                     description:"'montant' doit être un double",
                                     minimum:0,
+                                },
+                                typeDevis: {
+                                    enum:["prestation","achat"],
+                                    description:"'montant' doit être `prestation ou `achat`",
+                                },
+                            }
+                        }
+                    },
+                    "details.achat": {
+                        bsonType: "array",
+                        items: {
+                            bsonType: "object",
+                            required: [
+                              "description",
+                              "montant",
+                              "typeDevis"
+                            ],
+                            additionalProperties: false,
+                            description: "'items' must contain the stated fields.",
+                            properties: {
+                                description: {
+                                    bsonType:"string",
+                                    description:"'description' doit être une chaîne de charactère"
+                                },
+                                montant: {
+                                    bsonType:"double",
+                                    description:"'montant' doit être un double",
+                                    minimum:0,
+                                },
+                                typeDevis: {
+                                    enum:["prestation","achat"],
+                                    description:"'montant' doit être `prestation ou `achat`",
                                 },
                             }
                         }
