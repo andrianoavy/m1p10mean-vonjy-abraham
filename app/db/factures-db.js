@@ -7,7 +7,7 @@ module.exports = {
     saveOne: async function (entree) {
         return collection.insertOne(entree);
     },
-    findOne: async function(where){
+    findOne: async function (where) {
         return collection.findOne(where)
     },
     findAllFactures: async function (userId, options) {
@@ -19,24 +19,40 @@ module.exports = {
 
         if (skip < 0) skip = 0
         if (limit <= 0) skip = 10
-        
-        const where = {paid:false}
+
+        const where = { paid: false }
 
         where.idUser = idUser
-        if(options.search)
-            where.$or= [
+        if (options.search)
+            where.$or = [
                 { "resumeVoiture": { $regex: `.*${options.search}.*`, $options: 'i' } },
                 { "motif": { $regex: `.*${options.search}.*`, $options: 'i' } },
             ]
-        if(options.showPaid){
-                delete where.paid
+        if (options.showPaid) {
+            delete where.paid
         }
 
         const factures = await collection.aggregate([
-            { $match: where , },
-            { $project : { details :0 } },
+            { $match: where, },
+            { $project: { details: 0 } },
             {
-                $sort: { dateFacture: -1, paid:-1 }
+                $lookup: {
+                    from: "paiements",
+                    localField: "_id",
+                    foreignField: "idFacture",
+                    pipeline: [
+                        { $project: { _id:0, valid:1 }},
+                    ],
+                    as: "valid",
+                }
+            },
+            {
+                $set: {
+                    valid: { $arrayElemAt: ["$valid.valid", 0] }
+                }
+            },
+            {
+                $sort: { dateFacture: -1, paid: -1 }
             },
             {
                 $skip: skip
@@ -47,17 +63,17 @@ module.exports = {
         ]).toArray();
 
         if (Array.isArray(factures) && factures.length > 0) {
-            const countWhere = 
-                (options.showPaid)?
+            const countWhere =
+                (options.showPaid) ?
                     { idUser: idUser }
-                :
-                { idUser: idUser, paid:false }
+                    :
+                    { idUser: idUser, paid: false }
             const count = await collection.countDocuments(countWhere)
             return { factures: factures, page: skip, total: count }
         }
-        return {factures:[],page:skip, total:0};
+        return { factures: [], page: skip, total: 0 };
     },
-    updateOne:async function(idFacture, set){
-        return collection.updateOne({_id:new ObjectId(idFacture)},set)
+    updateOne: async function (idFacture, set) {
+        return collection.updateOne({ _id: new ObjectId(idFacture) }, set)
     }
 }
